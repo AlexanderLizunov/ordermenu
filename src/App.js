@@ -10,7 +10,9 @@ class App extends Component {
         super(props);
         this.state = {
             picked: false,
-            food: ''
+            food: [],
+            order: [false, false, false,false, false]
+
         }
     }
 
@@ -21,8 +23,12 @@ class App extends Component {
     getText() {
         axios.get('clients.json')
             .then((response) => {
-                this.setState({
+                this.setState(
+                    {
                         food: response.data
+                    }, function () {
+
+                        console.log(this.state)
                     }
                 )
             })

@@ -21,7 +21,7 @@ class Menu extends Component {
         if (foodArray.length > 0) {
 
             listItems = foodArray.map((shop, index) =>
-                <Supplier number={index} dishes={shop}  />
+                <Supplier key={index} number={index} dishes={shop}  />
             )
             // console.log(listItems)
         }

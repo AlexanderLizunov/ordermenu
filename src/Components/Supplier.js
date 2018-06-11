@@ -18,7 +18,7 @@ class Supplier extends Component {
         let target = event.target
         while (target !== this) {
             if (target.getAttribute("data-list-item") == 'supplier-list') {
-                console.log(target.getAttribute('data-orderid'))
+                console.log(target.getAttribute('data-orderid'));
                 this.setState({
                     orderId: target.getAttribute("data-orderid")
                 })
@@ -30,29 +30,15 @@ class Supplier extends Component {
     }
 
     render() {
-        function isEmptyObject(obj) {
-            for (var i in obj) {
-                if (obj.hasOwnProperty(i)) {
-                    return false;
-                }
-            }
-            return true;
-        }
 
-        let supplierListArray = [];
-        let supplierList = [];
+        console.log(this.props.dishes.dishes)
 
-        if (isEmptyObject(this.props.dishes) === false) {
-            let supplierDishes = this.props.dishes
-            for (let key in supplierDishes) {
-                supplierListArray.push(supplierDishes[key])
-            }
-
-            console.log(supplierListArray)
+        let supplierListArray = this.props.dishes.dishes;
+        let supplierList;
             supplierList = supplierListArray.map((dishes, index) =>
                 <SingleDish key={index} image={dishes.avatar} title={dishes.firstName}/>
-            )
-        }
+            );
+
         if (""+this.props.number === this.state.orderId) {
             return (
 
