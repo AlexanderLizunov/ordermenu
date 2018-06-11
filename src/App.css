@@ -1,0 +1,11 @@
+
+
+
+.shop-card{
+  background: lightgray;
+  border: 2px solid black;
+}
+
+.list-items__active{
+  background-color: green;
+}
