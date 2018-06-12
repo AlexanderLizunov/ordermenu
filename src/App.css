@@ -1,11 +1,50 @@
 
-
-
-.shop-card{
-  background: lightgray;
-  border: 2px solid black;
+.shop-card {
+    background: lightgray;
+    border: 2px solid black;
 }
 
-.list-items__active{
-  background-color: green;
+.list-items__active {
+    background-color: green;
+}
+
+.app-background {
+    position: relative;
+    background-image: linear-gradient(to bottom, rgba(211, 211, 211, 1), rgba(211, 211, 211, 0));
+    width: 100vw;
+    height: 100vh;
+}
+
+.form-block-cover {
+    width: 95%;
+    max-width: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid black;
+    padding-bottom: 20px;
+}
+
+.form-block-cover button {
+    display: block;
+    margin: 25px auto 0;
+}
+
+.form-title {
+    text-align: center;
+    padding: 5px;
+    background-color: goldenrod;
+    color: black;
+    font-size: 18px;
+}
+
+.form-footer {
+    width: 100%;
+    text-align: center;
+    display: block;
+}
+
+.form-button {
+
 }

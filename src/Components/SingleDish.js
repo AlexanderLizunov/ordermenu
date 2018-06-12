@@ -12,7 +12,6 @@ class SingleDish extends Component {
     }
 
     render() {
-        console.log(this.props.image)
         return (
             <Grid.Column width={8}>
                 <List>
