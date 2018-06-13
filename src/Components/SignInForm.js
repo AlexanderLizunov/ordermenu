@@ -52,8 +52,17 @@ class SignInForm extends React.Component {
         e.preventDefault()
         if (this.state.name > 0) {
             console.log('well done U have Logged-In')
-            this.props.onLogInUpdate(true);
+            // this.props.onLogInUpdate(true);
             // console.log(this.props.isLoggedIn)
+            //TODO: LATER  UPDATE TO GET DATA FROM SERVERS and save to store this.props.onUserIdUpdate(idValue);
+            if (localStorage.hasOwnProperty('userId') ) {
+                let userId = localStorage.getItem('userId')
+                console.log("localstoage have data ID: " + userId)
+            } else {
+                alert('NOT REGISTERED (NO DATA IN LOCAL STORAGE')
+                this.props.history.push("/registration")
+
+            }
             setTimeout(this.props.history.push("/"), 1000)
         } else {
             alert('CHECK FORM FIELDS')
@@ -68,7 +77,7 @@ class SignInForm extends React.Component {
             <form className={classes.container} onSubmit={this.handleSubmit.bind(this)} noValidate autoComplete="off">
                 <TextField
                     id="name"
-                    label="Name"
+                    label="Email"
                     className={classes.textField}
                     value={this.state.name}
                     onChange={this.handleChange('name')}
@@ -87,7 +96,7 @@ class SignInForm extends React.Component {
                 />
                 <Button variant="contained" color="primary" onClick={this.handleSubmit.bind(this)}
                         className={classes.button}>
-                    Primary
+                    SignIn
                 </Button>
             </form>
         );
@@ -101,17 +110,11 @@ SignInForm.propTypes = {
 export default connect(
     state => ({
         availableMenu: state.availableMenu,
-        isLoggedIn: state.isLoggedIn,
+        userId: state.userId,
     }),
     dispatch => ({
-        onListDownload: (array) => {
-            dispatch({type: 'LIST_DOWNLOAD', payload: array})
-        },
-        onOrderUpdate: (array) => {
-            dispatch({type: 'ORDER_UPDATE', payload: array})
-        },
-        onLogInUpdate: (array) => {
-            dispatch({type: 'IS_LOGGED_UPDATE', payload: array})
+        onUserIdUpdate: (array) => {
+            dispatch({type: 'USER_ID_UPDATE', payload: array})
         },
     })
 )(withRouter(withStyles(styles)(SignInForm)));

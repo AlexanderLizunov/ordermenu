@@ -9,13 +9,16 @@ import registerServiceWorker from './registerServiceWorker';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import login from './Routes/login'
 import registration from './Routes/registration'
+import admin from './Routes/admin'
 
 
 const initialState = {
     availableMenu: '',
     orderDishes: '',
-    Balance: '',
-    isLoggedIn: false
+    userBalance: '',
+    userEmail: '',
+    userId: '',
+    adminArray: ''
 }
 
 function order(state = initialState, action) {
@@ -29,15 +32,29 @@ function order(state = initialState, action) {
             ...state,
             orderDishes: action.payload
         }
-    } else if (action.type === "IS_LOGGED_UPDATE"){
+    } else if (action.type === "USER_ID_UPDATE") {
         return {
             ...state,
-            isLoggedIn: action.payload
+            userId: action.payload
         }
-
+    } else if (action.type === "USER_EMAIL_UPDATE") {
+        return {
+            ...state,
+            userEmail: action.payload
+        }
+    }else if (action.type === "USER_BALANCE_UPDATE") {
+        return {
+            ...state,
+            userBalance: action.payload
+        }
+    }else if (action.type === "ADMIN_ARRAY_UPDATE") {
+        return {
+            ...state,
+            adminArray: action.payload
+        }
     }
 
-        console.log(action)
+    console.log(action)
     return state
 }
 
@@ -56,6 +73,7 @@ ReactDOM.render(
 
                 <Route path='/login' component={login}/>
                 <Route path='/registration' component={registration}/>
+                <Route path='/admin' component={admin}/>
                 <Route path='/' component={App}/>
 
             </Switch>

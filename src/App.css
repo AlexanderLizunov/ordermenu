@@ -28,7 +28,7 @@
 
 .form-block-cover button {
     display: block;
-    margin: 25px auto 0;
+    margin: 25px auto ;
 }
 
 .form-title {
@@ -47,4 +47,28 @@
 
 .form-button {
 
+}
+
+.MuiButtonBase-root-8 {
+    padding: 0;
+}
+.MuiButtonBase-root-8:hover {
+    cursor: default;
+}
+
+.MuiButtonBase-root-8 span {
+    cursor: pointer;
+    padding: 10px;
+    font-size: 16px!important;
+}
+
+.Navigation-root-1 {
+    width: 100%!important;
+}
+
+.navigation-text{
+    box-sizing: border-box;
+    width: auto;
+    min-width: 50px;
+    margin: 25px 19px 0;
 }

@@ -19,9 +19,14 @@ class App extends Component {
 
     componentWillMount() {
         console.log(this.state.linkId)
-        this.getText()
-        if (this.props.isLoggedIn !== false) {
-            // console.log('super')
+        // localStorage.setItem(key, value);
+        if (localStorage.hasOwnProperty('userId')) {
+            let userId = localStorage.getItem('userId')
+            console.log("localstoage have data ID: " + userId)
+            //TODO: LATTER MAKE REQUEST TO SERVER TO GET BALANCE AND EMAIL
+            this.props.onUserBalanceUpdate("50$")
+            this.props.onUserEmailUpdate(localStorage.getItem('userEmail'))
+            this.getText()
         } else {
 
             this.props.history.push("/registration")
@@ -44,6 +49,7 @@ class App extends Component {
         axios.get('clients.json')
             .then((response) => {
                 this.props.onListDownload(response.data)
+
                 console.log(this.props.clientList)
                 this.orderBlanker(response.data)
             })
@@ -74,8 +80,11 @@ export default connect(
         onOrderUpdate: (array) => {
             dispatch({type: 'ORDER_UPDATE', payload: array})
         },
-        onLogInUpdate: (array) => {
-            dispatch({type: 'IS_LOGGED_UPDATE', payload: array})
+        onUserEmailUpdate: (array) => {
+            dispatch({type: 'USER_EMAIL_UPDATE', payload: array})
+        },
+        onUserBalanceUpdate: (array) => {
+            dispatch({type: 'USER_BALANCE_UPDATE', payload: array})
         },
     })
 )(App);

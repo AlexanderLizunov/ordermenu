@@ -29,19 +29,19 @@ class RegistrationForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
+            email: '',
             password: '',
             repassword: '',
-            linkId: uuid.v1()
+            linkId: ''
         }
     }
 
-    handleChange = name => event => {
+    handleChange = email => event => {
         this.setState({
-            name: event.target.value,
+            email: event.target.value,
 
         });
-        // console.log(this.state.name)
+        console.log(this.state.email)
     };
     handleChangePas = pas => event => {
         this.setState({
@@ -62,10 +62,21 @@ class RegistrationForm extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault()
-        if (this.state.password === this.state.repassword && this.state.name > 0) {
+        if (this.state.password === this.state.repassword && this.state.password.length > 0 && this.state.email != '') {
             console.log('welldone')
-            this.props.onLogInUpdate(true);
-            console.log('LINK ID FOR EMAIL'+this.state.linkId)
+            const idValue = uuid.v1()
+            this.props.onUserIdUpdate(idValue);
+            //TODO: LATTER WILL BE RECEIVED FROM SERVER
+            this.props.onUserBalanceUpdate('50$');
+            this.props.onUserEmailUpdate(this.state.email);
+
+            console.log('LINK ID FOR EMAIL'+  idValue)
+            localStorage.setItem('userId',  idValue);
+
+            console.log('user emails to localstorage' + this.state.email)
+            localStorage.setItem('userEmail',  this.state.email);
+            localStorage.setItem('userBalance',  '50$');
+
             setTimeout(this.props.history.push("/"), 1000)
         } else {
             alert('CHECK FORM FIELDS')
@@ -79,8 +90,8 @@ class RegistrationForm extends React.Component {
         return (
             <form className={classes.container} onSubmit={this.handleSubmit.bind(this)} noValidate autoComplete="off">
                 <TextField
-                    id="name"
-                    label="Name"
+                    id="email"
+                    label="Email"
                     className={classes.textField}
                     value={this.state.name}
                     onChange={this.handleChange('name')}
@@ -99,7 +110,7 @@ class RegistrationForm extends React.Component {
                 />
                 <TextField
                     id="password-input-repeat"
-                    label="Password"
+                    label="Repeat Password"
                     className={classes.textField}
                     type="password"
                     onChange={this.handleChangerePas('pas2')}
@@ -108,7 +119,7 @@ class RegistrationForm extends React.Component {
                 />
                 <Button variant="contained" color="primary" onClick={this.handleSubmit.bind(this)}
                         className={classes.button}>
-                    Primary
+                    SignUp
                 </Button>
             </form>
         );
@@ -122,17 +133,20 @@ RegistrationForm.propTypes = {
 export default connect(
     state => ({
         availableMenu: state.availableMenu,
-        isLoggedIn: state.isLoggedIn,
+        userId: state.userId,
+        userEmail: state.userEmail,
+        userBalance: state.userBalance
     }),
     dispatch => ({
-        onListDownload: (array) => {
-            dispatch({type: 'LIST_DOWNLOAD', payload: array})
+        onUserEmailUpdate: (array) => {
+            dispatch({type: 'USER_EMAIL_UPDATE', payload: array})
         },
-        onOrderUpdate: (array) => {
-            dispatch({type: 'ORDER_UPDATE', payload: array})
+        onUserIdUpdate: (array) => {
+            dispatch({type: 'USER_ID_UPDATE', payload: array})
         },
-        onLogInUpdate: (array) => {
-            dispatch({type: 'IS_LOGGED_UPDATE', payload: array})
+        onUserBalanceUpdate: (array) => {
+            dispatch({type: 'USER_BALANCE_UPDATE', payload: array})
         },
+
     })
 )(withRouter(withStyles(styles)(RegistrationForm)));
