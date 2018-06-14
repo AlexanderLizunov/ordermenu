@@ -59,19 +59,50 @@ class SingleCard extends React.Component {
         open: false,
     };
 
+    updateCardData(object, index) {
+        let tempCardData = this.state.cardData
+        tempCardData[index] = object
+        this.setState({
+            cardData: tempCardData
+        });
+        console.log(this.state.cardData)
+    }
+
     handleChange = event => {
         // console.log(event.getAttribute('data-orderid'));
         let b = this.state.dish
-        console.log(b[2])
+        // console.log(b[2])
         b[event.target.name] = event.target.value
-        console.log(event.target.name)
-        console.log(event.target.value)
+        // console.log(event.target.name)
+        // console.log(event.target.value)
+        // console.log(this.state.card)
+
         this.setState({
-            dish : b
+            dish: b
         });
 
-        console.log(this.state)
+        let adminArray = this.props.adminArray
+        adminArray[this.props.card] = this.state.cardData
+        console.log(adminArray)
+
+        this.updateCardData(this.findDish(event.target.value), event.target.name)
+        console.log(this.state.cardData)
+        console.log(this.props.card)
+        this.props.onAdminArrayUpdate(adminArray)
+        // console.log(this.state)
     };
+
+    findDish(temp) {
+        var dishObject
+        this.props.options.filter(function (dish) {
+            if (temp === dish.title) {
+                return dishObject = dish
+            }
+        });
+        console.log("DISH OBJECT= ")
+        console.log(dishObject)
+        return dishObject
+    }
 
     handleClose = () => {
         this.setState({open: false});
@@ -81,10 +112,6 @@ class SingleCard extends React.Component {
         this.setState({open: true});
     };
 
-    handleItemId(event){
-        console.log("MENUITEMID"+event.getAttribute('data-orderid'));
-
-    }
 
     render() {
 
@@ -93,15 +120,16 @@ class SingleCard extends React.Component {
 
         if (this.props.options.length > 0) {
             optionsArray = this.props.options.map((dish, listIndex) =>
-                <MenuItem key={listIndex} onClick={this.handleItemId.bind(this)} data-orderid={listIndex} value={dish.title}>
-                   {dish.title}
+                <MenuItem key={listIndex}
+                          value={dish.title}>
+                    {dish.title}
                 </MenuItem>
             )
         }
 
         var selectArray = []
         for (let variable = 0; variable <= 3; variable++) {
-            let b= this.state.dish
+            let b = this.state.dish
 
             selectArray.push(
                 <Select
@@ -139,10 +167,14 @@ SingleCard.propTypes = {
 
 export default connect(
     state => ({
-        adminArray: state.adminArray
+        adminArray: state.adminArray,
+        userBalance: state.userBalance
     }),
     dispatch => ({
         onUserBalanceUpdate: (array) => {
+            dispatch({type: 'ADMIN_ARRAY_UPDATE', payload: array})
+        },
+        onAdminArrayUpdate: (array) => {
             dispatch({type: 'ADMIN_ARRAY_UPDATE', payload: array})
         },
 

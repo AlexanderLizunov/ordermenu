@@ -48,7 +48,7 @@ class Navigation extends Component {
                 className={'Navigation-block'+  classes.root}>
                 <BottomNavigationAction label={<Link to="/">Home</Link>}/>
                 <BottomNavigationAction label={<Link to="stats">Statistic</Link>}/>
-                <BottomNavigationAction label={<Link to="/admin">Admin</Link>}/>
+                <BottomNavigationAction label={<Link to="/admin/1">Admin</Link>}/>
                 <div className='navigation-text'>
                     {this.props.userEmail}
 

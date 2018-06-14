@@ -62,7 +62,7 @@ class RegistrationForm extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault()
-        if (this.state.password === this.state.repassword && this.state.password.length > 0 && this.state.email != '') {
+        if (this.state.password === this.state.repassword && this.state.password.length > 0 && this.state.email !== '') {
             console.log('welldone')
             const idValue = uuid.v1()
             this.props.onUserIdUpdate(idValue);

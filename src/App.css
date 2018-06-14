@@ -72,3 +72,34 @@
     min-width: 50px;
     margin: 25px 19px 0;
 }
+
+
+.admin-container {
+    width: 93.75%;
+    max-width: 1600px;
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.cards-container{
+    width: 80%!important;
+}
+
+
+.button-block{
+    width: 20%;
+    text-align: center;
+    position: relative;
+}
+
+.button-item-cover{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top:25%;
+    left: 50%;
+    transform: rotate(-90deg) translate(-50%,-50%);
+}

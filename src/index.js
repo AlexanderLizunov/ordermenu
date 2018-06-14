@@ -9,7 +9,8 @@ import registerServiceWorker from './registerServiceWorker';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import login from './Routes/login'
 import registration from './Routes/registration'
-import admin from './Routes/admin'
+import adminFirst from './Routes/adminFirst'
+import adminSecond from './Routes/adminSecond'
 
 
 const initialState = {
@@ -18,7 +19,7 @@ const initialState = {
     userBalance: '',
     userEmail: '',
     userId: '',
-    adminArray: ''
+    adminArray: []
 }
 
 function order(state = initialState, action) {
@@ -73,7 +74,8 @@ ReactDOM.render(
 
                 <Route path='/login' component={login}/>
                 <Route path='/registration' component={registration}/>
-                <Route path='/admin' component={admin}/>
+                <Route path='/admin/1' component={adminFirst}/>
+                <Route path='/admin/2' component={adminSecond}/>
                 <Route path='/' component={App}/>
 
             </Switch>
