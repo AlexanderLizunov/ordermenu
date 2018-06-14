@@ -46,7 +46,7 @@ class adminFirst extends Component {
                 this.setState({
                     dishesList: response.data
                 })
-                console.log(this.state.dishesList)
+                // console.log(this.state.dishesList)
             })
             .catch((error) => {
                 console.log(error)
@@ -61,6 +61,7 @@ class adminFirst extends Component {
     handleChange = name => event => {
         this.setState({[name]: event.target.checked});
         console.log(name, event.target.checked)
+        //TODO stash to database
         setTimeout(this.props.history.push("/admin/2"), 1000)
 
     };
@@ -71,8 +72,8 @@ class adminFirst extends Component {
         const {classes} = this.props;
         for (let variable = 0; variable <= 3; variable++) {
             let adminArray = this.props.adminArray
-            console.log('RENDERING')
-            console.log(adminArray)
+            // console.log('RENDERING')
+            // console.log(adminArray)
             if (adminArray.length == 0) {
                 for (let cardNum = 0; cardNum <= 3; cardNum++) {
                     adminArray[cardNum] = [
@@ -95,7 +96,7 @@ class adminFirst extends Component {
                     ]
                 }
 
-                console.log(adminArray)
+                // console.log(adminArray)
             }
             cardsArray.push(
                 <Grid item xs={12} sm={6}>

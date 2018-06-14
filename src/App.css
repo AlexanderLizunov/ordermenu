@@ -28,7 +28,7 @@
 
 .form-block-cover button {
     display: block;
-    margin: 25px auto ;
+    margin: 25px auto;
 }
 
 .form-title {
@@ -52,6 +52,7 @@
 .MuiButtonBase-root-8 {
     padding: 0;
 }
+
 .MuiButtonBase-root-8:hover {
     cursor: default;
 }
@@ -59,20 +60,19 @@
 .MuiButtonBase-root-8 span {
     cursor: pointer;
     padding: 10px;
-    font-size: 16px!important;
+    font-size: 16px !important;
 }
 
 .Navigation-root-1 {
-    width: 100%!important;
+    width: 100% !important;
 }
 
-.navigation-text{
+.navigation-text {
     box-sizing: border-box;
     width: auto;
     min-width: 50px;
     margin: 25px 19px 0;
 }
-
 
 .admin-container {
     width: 93.75%;
@@ -83,23 +83,75 @@
     justify-content: space-between;
 }
 
-.cards-container{
-    width: 80%!important;
+.cards-container {
+    width: 80% !important;
 }
 
-
-.button-block{
+.button-block {
     width: 20%;
     text-align: center;
     position: relative;
 }
 
-.button-item-cover{
+.button-item-cover {
     text-align: center;
     display: flex;
     justify-content: center;
     position: absolute;
-    top:25%;
+    top: 25%;
     left: 50%;
-    transform: rotate(-90deg) translate(-50%,-50%);
+    transform: rotate(-90deg) translate(-50%, -50%);
+}
+
+.user-balance-block {
+    width: 40%;
+    border: 3px solid black;
+    padding: 20px   ;
+}
+
+.balance-form-item {
+    display: flex;
+    flex-wrap: nowrap !important;
+}
+
+.balance-form-item span {
+    width: 30%;
+    text-align: left;
+    padding-top: 24px;
+}
+
+.balance-form-input {
+    width: 60% !important;
+}
+
+.balance-form-input  input{
+    text-align: right!important;
+}
+
+.balance-block-header{
+    font-size: 20px;
+    text-align: center;
+    display: flex;
+}
+
+.balance-block-title {
+    width: 50%;
+
+}
+.balance-block-title span{
+    text-align: right;
+}
+
+.balance-block-footer{
+    background-color: lightgray;
+    height: 60px;
+    text-align: right;
+}
+
+.balance-buttons{
+    border: none;
+    background: transparent;
+    margin: 10px;
+    font-size: 16px;
+    cursor: pointer;
 }
