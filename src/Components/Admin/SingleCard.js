@@ -114,7 +114,7 @@ class SingleCard extends React.Component {
 
 
     render() {
-
+        console.log("IS DISABLED" + this.props.isDisbled)
         const {classes} = this.props;
         let optionsArray = []
 
@@ -152,7 +152,7 @@ class SingleCard extends React.Component {
 
         return (
             <form autoComplete="off">
-                <FormControl className={classes.formControl}>
+                <FormControl {... this.props.isDisbled?{disabled:true}:{}} className={classes.formControl}>
                     {selectArray}
                 </FormControl>
             </form>

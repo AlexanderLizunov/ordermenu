@@ -9,8 +9,8 @@ import registerServiceWorker from './registerServiceWorker';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import login from './Routes/login'
 import registration from './Routes/registration'
-import adminFirst from './Routes/adminFirst'
-import adminSecond from './Routes/adminSecond'
+import adminFirst from './Routes/admin'
+import Stats from './Routes/stats'
 
 
 const initialState = {
@@ -19,7 +19,9 @@ const initialState = {
     userBalance: '',
     userEmail: '',
     userId: '',
-    adminArray: []
+    adminArray: [],
+    BACKEND_ORDER_DATE_ORDER_STORE:[],
+    currentDate: ''
 }
 
 function order(state = initialState, action) {
@@ -53,6 +55,16 @@ function order(state = initialState, action) {
             ...state,
             adminArray: action.payload
         }
+    }else if (action.type === "BACKEND_ORDER_STORE_UPDATE") {
+        return {
+            ...state,
+            BACKEND_ORDER_DATE_ORDER_STORE: action.payload
+        }
+    }else if (action.type === "CURRENT_DATE_SET") {
+        return {
+            ...state,
+            date: action.payload
+        }
     }
 
     console.log(action)
@@ -74,8 +86,8 @@ ReactDOM.render(
 
                 <Route path='/login' component={login}/>
                 <Route path='/registration' component={registration}/>
-                <Route path='/admin/1' component={adminFirst}/>
-                <Route path='/admin/2' component={adminSecond}/>
+                <Route path='/admin' component={adminFirst}/>
+                <Route path='/stats' component={Stats}/>
                 <Route path='/' component={App}/>
 
             </Switch>

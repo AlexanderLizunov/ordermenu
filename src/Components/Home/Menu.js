@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Supplier from './Supplier'
+import Supplier from './SingleCard'
 
 import {Container} from 'semantic-ui-react'
 import {Grid} from 'semantic-ui-react'

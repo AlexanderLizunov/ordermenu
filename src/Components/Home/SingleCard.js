@@ -6,7 +6,7 @@ import SingleDish from "./SingleDish";
 import {connect} from "react-redux";
 
 
-class Supplier extends Component {
+class SingleCard extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -19,15 +19,20 @@ class Supplier extends Component {
         while (target !== this) {
             if (target.getAttribute("data-list-item") === 'supplier-list') {
                 console.log(target.getAttribute('data-orderid'));
-                let orderArray = this.props.orderDishes
-                orderArray[target.getAttribute('data-orderid')] = !orderArray[target.getAttribute('data-orderid')]
+                // let orderArray = this.props.orderDishes
+                // orderArray[target.getAttribute('data-orderid')] = !orderArray[target.getAttribute('data-orderid')]
                 // console.log(orderArray)
                 // orderArray[target.getAttribute('data-orderid')] = true
-                this.props.onOrderUpdate(orderArray)
+
+
+                this.props.onOrderUpdate(target.getAttribute('data-orderid'))
                 this.setState({
                     orderId: target.getAttribute("data-orderid")
                 })
                 console.log(this.state)
+                console.log(this.props.dishes)
+                //TODO LATER SEND TO BACKEND
+                this.props.onStoreOrder(this.props.dishes.dishes)
                 return;
             }
             target = target.parentNode;
@@ -38,7 +43,8 @@ class Supplier extends Component {
 
         // console.log(this.props.dishes.dishes)
         let activeCardClassName
-        if (this.props.orderDishes[this.props.number] === true) {
+
+        if (this.props.orderDishes == this.props.number) {
             activeCardClassName = 'shop-card list-items__active'
         } else {
             activeCardClassName = 'shop-card'
@@ -70,10 +76,15 @@ export default connect(
     state => ({
         availableMenu: state.availableMenu,
         orderDishes: state.orderDishes,
+        date: state.date,
+        BACKEND_ORDER_DATE_ORDER_STORE: state.BACKEND_ORDER_DATE_ORDER_STORE,
     }),
     dispatch => ({
         onOrderUpdate: (array) => {
             dispatch({type: 'ORDER_UPDATE', payload: array})
         },
+        onStoreOrder: (array) => {
+            dispatch({type: 'BACKEND_ORDER_STORE_UPDATE', payload: array})
+        },
     })
-)(Supplier);
+)(SingleCard);

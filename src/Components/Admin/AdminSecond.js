@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
-import Navigation from '../Components/Navigation'
 
 // import SingleSelect from '../Components/Admin/SingleSelect'
 import axios from "axios/index";
+
+
+import SimpleModal from './SimpleModal'
 import {withStyles} from "@material-ui/core/styles/index";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
@@ -13,7 +15,7 @@ import Grid from '@material-ui/core/Grid';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
-import BalanceItem from '../Components/Admin/BalanceItem'
+import BalanceItem from './BalanceItem'
 
 
 const styles = theme => ({
@@ -28,7 +30,7 @@ const styles = theme => ({
 });
 
 
-class adminFirst extends Component {
+class AdminSecond extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -41,7 +43,7 @@ class adminFirst extends Component {
     }
 
     getList() {
-        axios.get('../users.json')
+        axios.get('../usersBalance.json')
             .then((response) => {
                 this.setState({
                     userList: response.data
@@ -53,12 +55,12 @@ class adminFirst extends Component {
             })
     }
 
-    userDisplay(pagenum) {
+    userDisplay(pageNum) {
         console.log('ОБНОВЛЕНИЕ  СПИСКА ДЛЯ ПОКАЗА')
-        console.log(pagenum)
+        console.log(pageNum)
         if (this.state.userList !== '') {
-            var pageNum = pagenum,
-                usersShown = 8,
+
+            var  usersShown = 8,
                 allUsers = this.state.userList,
                 userList = allUsers.slice(pageNum * usersShown, (pageNum + 1) * usersShown)
 
@@ -69,7 +71,9 @@ class adminFirst extends Component {
                 page: pageNum,
                 displayUsers: userList
             })
+
             console.log(this.state.displayUsers)
+            console.log(this.state.page)
         }
 
 
@@ -79,47 +83,40 @@ class adminFirst extends Component {
         //TODO: LATTER MAKE REQUEST TO SERVER TO GET BALANCE AND EMAIL
         console.log("WILLMOUNT")
 
-        this.getList()
+        this.getList(0)
     }
-
-    handleChange = name => event => {
-        // this.setState({ [name]: event.target.checked });
-        console.log(name, event.target.checked)
-        setTimeout(this.props.history.push("/admin/1"), 1000)
-
-    };
 
     prevList() {
         let num = this.state.page - 1
         console.log(num)
 
-        if (this.state.page == 1) {
+        if (this.state.page == 0) {
             alert("Первая страница")
         } else {
             this.setState({
                 page: num
             })
             console.log(this.state.page)
-            this.userDisplay()
+            this.userDisplay(num)
         }
     }
 
     nextList() {
-        console.log("NEXT PAGE" + this.state.page)
         let num = this.state.page + 1
+        console.log("NEXT PAGE" + num)
         let arrayLength = this.state.userList.length
 
         console.log(arrayLength
         )
         console.log(Math.ceil(arrayLength / 8))
+
+        if (num <= Math.ceil(arrayLength / 8)) {
+
             this.userDisplay(num)
-
-        if (num == Math.ceil(arrayLength / 8)) {
-
-            alert("КОНЕЦ СПИСКА")
-        } else {
-
             console.log("ПОСЛЕ СТЕЙТА" + this.state.page)
+        } else {
+            alert("КОНЕЦ СПИСКА")
+
         }
     }
 
@@ -129,8 +126,8 @@ class adminFirst extends Component {
         console.log("RENDERING")
         console.log(this.state.displayUsers)
 
-        var userArray = []
-        var pageNum = this.state.page - 1,
+        var userArray = [];
+        var pageNum = this.state.page,
             usersShown = 8,
             showUsers = this.state.displayUsers
         console.log(showUsers)
@@ -145,23 +142,7 @@ class adminFirst extends Component {
 
         return (
             <div>
-                <Navigation/>
-                <div className="admin-container">
-                    <div className="button-block">
-                        <FormGroup row className="button-item-cover">
-                            <FormControlLabel
-                                control={
-                                    <Switch
-                                        checked={this.state.checkedB}
-                                        onChange={this.handleChange('checkedB')}
-                                        value="checkedB"
-                                        color="primary"
-                                    />
-                                }
-                                label=""
-                            />
-                        </FormGroup>
-                    </div>
+                <div className="admin-container admin-second">
                     <div className='user-balance-block'>
                         <div className='balance-block-header'>
                             <div className='balance-block-title'>EMAIL</div>
@@ -179,7 +160,7 @@ class adminFirst extends Component {
                         </div>
                     </div>
                     <div className="form-order-block">
-                        <button>FORM ORDER</button>
+                       <SimpleModal />
                     </div>
                 </div>
 
@@ -191,7 +172,6 @@ class adminFirst extends Component {
     }
 }
 
-// export default registration;
 export default connect(
     state => ({
         adminArray: state.adminArray,
@@ -206,5 +186,4 @@ export default connect(
         },
 
     })
-)(withRouter(withStyles(styles)(adminFirst)));
-// export default (FullWidthGrid);
+)(withRouter(withStyles(styles)(AdminSecond)));

@@ -4,16 +4,20 @@ import axios from 'axios';
 
 import './App.css'
 
-import Menu from './Components/Menu';
+import Menu from './Components/Home/Menu';
 import Navigation from "./Components/Navigation";
 
 
 class App extends Component {
     constructor(props) {
         super(props);
+
+        var today = new Date(),
+            date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
         this.state = {
             food: [],
             order: [],
+            date: date
         }
     }
 
@@ -32,6 +36,8 @@ class App extends Component {
             this.props.history.push("/registration")
 
         }
+        this.props.onDateSet(this.state.date)
+
     }
 
     orderBlanker(array) {
@@ -72,6 +78,7 @@ export default connect(
     state => ({
         availableMenu: state.availableMenu,
         isLoggedIn: state.isLoggedIn,
+        date: state.date,
     }),
     dispatch => ({
         onListDownload: (array) => {
@@ -85,6 +92,9 @@ export default connect(
         },
         onUserBalanceUpdate: (array) => {
             dispatch({type: 'USER_BALANCE_UPDATE', payload: array})
+        },
+        onDateSet: (array) => {
+            dispatch({type: 'CURRENT_DATE_SET', payload: array})
         },
     })
 )(App);

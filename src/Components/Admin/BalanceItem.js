@@ -29,20 +29,20 @@ class BalanceItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: this.props.user,
-            userNumber: this.props.userNumber
+            user: '',
+            userNumber: ''
         }
     }
 
     handleChange = balance => event => {
-        var userQuery = this.state.user
+        var userQuery = this.props.user
         userQuery.balance= event.target.value
         this.setState({
             user: userQuery,
         });
 
         console.log(this.state.user)
-        console.log(this.state.userNumber)
+        console.log(this.props.userNumber)
 
     };
 
@@ -58,12 +58,12 @@ class BalanceItem extends React.Component {
         return (
             <form className={'balance-form-item '+classes.container}  noValidate autoComplete="off">
                 <span>
-                    {this.state.user.email}
+                    {this.props.user.email}
                 </span>
                 <TextField
                     id="email"
                     className={'balance-form-input '+classes.textField}
-                    value={this.state.user.balance}
+                    value={this.props.user.balance}
                     onChange={this.handleChange('balance')}
                     margin="normal"
                 />

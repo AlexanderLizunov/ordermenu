@@ -3,6 +3,7 @@ import Navigation from '../Components/Navigation'
 
 // import SingleSelect from '../Components/Admin/SingleSelect'
 import SingleCard from '../Components/Admin/SingleCard'
+import AdminSecond from '../Components/Admin/AdminSecond'
 import axios from "axios/index";
 import {withStyles} from "@material-ui/core/styles/index";
 import {withRouter} from "react-router-dom";
@@ -28,12 +29,13 @@ const styles = theme => ({
 });
 
 
-class adminFirst extends Component {
+class admin extends Component {
     constructor(props) {
         super(props)
         this.state = {
             dishesList: '',
             checkedB: true,
+            selectionDisabled: false
         }
     }
 
@@ -62,12 +64,19 @@ class adminFirst extends Component {
         this.setState({[name]: event.target.checked});
         console.log(name, event.target.checked)
         //TODO stash to database
-        setTimeout(this.props.history.push("/admin/2"), 1000)
 
+            this.setState({
+                selectionDisabled: !this.state.selectionDisabled
+            })
+
+        // setTimeout(this.props.history.push("/admin/2"), 1000)
+        console.log("ADMIN IS DISABLED" + this.state.selectionDisabled)
     };
 
 
     render() {
+        console.log("ADMIN IS DISABLED" + this.state.selectionDisabled)
+
         let cardsArray = [];
         const {classes} = this.props;
         for (let variable = 0; variable <= 3; variable++) {
@@ -101,7 +110,7 @@ class adminFirst extends Component {
             cardsArray.push(
                 <Grid item xs={12} sm={6}>
                     <Paper className={classes.paper}>
-                        <SingleCard key={variable} card={variable} cardState={adminArray[variable]}
+                        <SingleCard isDisbled={this.state.selectionDisabled} key={variable} card={variable} cardState={adminArray[variable]}
                                     options={this.state.dishesList}/>
                     </Paper>
                 </Grid>
@@ -139,14 +148,13 @@ class adminFirst extends Component {
                 </div>
 
                 <div>
-
+                    <AdminSecond/>
                 </div>
             </div>
         );
     }
 }
 
-// export default registration;
 export default connect(
     state => ({
         adminArray: state.adminArray,
@@ -161,5 +169,4 @@ export default connect(
         },
 
     })
-)(withRouter(withStyles(styles)(adminFirst)));
-// export default (FullWidthGrid);
+)(withRouter(withStyles(styles)(admin)));
