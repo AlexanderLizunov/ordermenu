@@ -167,7 +167,7 @@ SingleCard.propTypes = {
 
 export default connect(
     state => ({
-        adminArray: state.adminArray,
+        adminArray: state.newMenuAdmin,
         userBalance: state.userBalance
     }),
     dispatch => ({

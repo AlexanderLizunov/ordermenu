@@ -10,7 +10,7 @@ class SingleCard extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            orderId: ''
+            orderId: this.props.orderMenu
         }
     }
 
@@ -29,8 +29,8 @@ class SingleCard extends Component {
                 this.setState({
                     orderId: target.getAttribute("data-orderid")
                 })
-                console.log(this.state)
-                console.log(this.props.dishes)
+                // console.log(this.state)
+                // console.log(this.props.dishes)
                 //TODO LATER SEND TO BACKEND
                 this.props.onStoreOrder(this.props.dishes.dishes)
                 return;
@@ -41,10 +41,12 @@ class SingleCard extends Component {
 
     render() {
 
-        // console.log(this.props.dishes.dishes)
+        // console.log(this.props.orderedMenu)
+        // console.log(this.props.number)
         let activeCardClassName
+        // if (this.props.orderDishes == this.props.number) {
 
-        if (this.props.orderDishes == this.props.number) {
+        if (this.props.orderedMenu == this.props.number) {
             activeCardClassName = 'shop-card list-items__active'
         } else {
             activeCardClassName = 'shop-card'
@@ -75,8 +77,8 @@ class SingleCard extends Component {
 export default connect(
     state => ({
         availableMenu: state.availableMenu,
-        orderDishes: state.orderDishes,
-        date: state.date,
+        orderedMenu: state.orderedMenu,
+        currentDate: state.currentDate,
         BACKEND_ORDER_DATE_ORDER_STORE: state.BACKEND_ORDER_DATE_ORDER_STORE,
     }),
     dispatch => ({

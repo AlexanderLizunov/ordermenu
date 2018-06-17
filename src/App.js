@@ -65,6 +65,7 @@ class App extends Component {
     }
 
     render() {
+        console.log(this.props.availableMenu)
         return (
             <div className="App">
                 <Navigation/>
@@ -82,7 +83,7 @@ export default connect(
     }),
     dispatch => ({
         onListDownload: (array) => {
-            dispatch({type: 'LIST_DOWNLOAD', payload: array})
+            dispatch({type: 'AVAILABLE_MENU_DOWNLOAD', payload: array})
         },
         onOrderUpdate: (array) => {
             dispatch({type: 'ORDER_UPDATE', payload: array})

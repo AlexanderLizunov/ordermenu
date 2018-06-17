@@ -11,68 +11,31 @@ import login from './Routes/login'
 import registration from './Routes/registration'
 import adminFirst from './Routes/admin'
 import Stats from './Routes/stats'
+import reducer from './reducers'
+
+// const initialState = {
+//     orderDishes: '',
+//     userProfile: {
+//         userBalance: '',
+//         userEmail: '',
+//         userId: '',
+//     },
+//     adminArray: [],
+//     BACKEND_ORDER_DATE_ORDER_STORE: [],
+//     currentDate: ''
+// }
 
 
-const initialState = {
-    availableMenu: '',
-    orderDishes: '',
-    userBalance: '',
-    userEmail: '',
-    userId: '',
-    adminArray: [],
-    BACKEND_ORDER_DATE_ORDER_STORE:[],
-    currentDate: ''
-}
 
-function order(state = initialState, action) {
-    if (action.type === 'LIST_DOWNLOAD') {
-        return {
-            ...state,
-            availableMenu: action.payload
-        }
-    } else if (action.type === "ORDER_UPDATE") {
-        return {
-            ...state,
-            orderDishes: action.payload
-        }
-    } else if (action.type === "USER_ID_UPDATE") {
-        return {
-            ...state,
-            userId: action.payload
-        }
-    } else if (action.type === "USER_EMAIL_UPDATE") {
-        return {
-            ...state,
-            userEmail: action.payload
-        }
-    }else if (action.type === "USER_BALANCE_UPDATE") {
-        return {
-            ...state,
-            userBalance: action.payload
-        }
-    }else if (action.type === "ADMIN_ARRAY_UPDATE") {
-        return {
-            ...state,
-            adminArray: action.payload
-        }
-    }else if (action.type === "BACKEND_ORDER_STORE_UPDATE") {
-        return {
-            ...state,
-            BACKEND_ORDER_DATE_ORDER_STORE: action.payload
-        }
-    }else if (action.type === "CURRENT_DATE_SET") {
-        return {
-            ...state,
-            date: action.payload
-        }
-    }
-
-    console.log(action)
-    return state
-}
+// function order(state = initialState, action) {
+//
+//
+//     console.log(action)
+//     return state
+// }
 
 const store = createStore(
-    order,
+    reducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 store.subscribe(() => {
     console.log('subscribe', store.getState())

@@ -82,6 +82,7 @@ class admin extends Component {
         for (let variable = 0; variable <= 3; variable++) {
             let adminArray = this.props.adminArray
             // console.log('RENDERING')
+            //TODO GET ADMIN ARRAY FROM  BACKEND Else
             // console.log(adminArray)
             if (adminArray.length == 0) {
                 for (let cardNum = 0; cardNum <= 3; cardNum++) {
@@ -157,7 +158,7 @@ class admin extends Component {
 
 export default connect(
     state => ({
-        adminArray: state.adminArray,
+        adminArray: state.newMenuAdmin,
         userBalance: state.userBalance
     }),
     dispatch => ({

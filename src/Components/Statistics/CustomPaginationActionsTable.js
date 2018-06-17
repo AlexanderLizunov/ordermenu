@@ -137,7 +137,8 @@ class CustomPaginationActionsTable extends React.Component {
             ].sort((a, b) => (a.calories < b.calories ? -1 : 1)),
             page: 0,
             rowsPerPage: 5,
-            statsList: ''
+            statsList: '',
+            displayList:''
 
         };
         // this.objectsToString = this.objectsToString.bind(this)
@@ -184,23 +185,30 @@ class CustomPaginationActionsTable extends React.Component {
         this.getList()
     }
 
-    // objectsToString(array){
-    //     console.log(array)
-    // }
 
-    // handleStatsOrderArray(array) {
-    //     let stringifyTitleArray = array
-    //
-    //     stringifyTitleArray.forEach(function (item, i) {
-    //          let tempString = item.order
-    //              this.objectsToString(1)
-    //         // stringifyTitleArray[i]
-    //         // alert( i + ": " + item + " (массив:" + arr + ")" );
-    //         // stringifyTitleArray[i]= item.
-    //         // console.log(item.date, item.order.orderNumber, item.order.orderText)
-    //
-    //     });
-    // }
+    handleStatsOrderArray(array) {
+        console.log('array')
+        let finalArray = []
+        finalArray = array.map((item) => {
+            // console.log(item)
+            let finalElement = {
+                date: '',
+                orderNumber: '',
+                orderTitle: ''
+            }
+            let summary = item.order.map((element, index) => {
+                return element.title
+            })
+            console.log(summary)
+            finalElement.date = item.date
+            finalElement.orderNumber = item.orderNumber
+            finalElement.orderTitle = `${summary}`
+            return finalElement
+        })
+        console.log(finalArray)
+    }
+
+
 
 
     render() {
@@ -208,16 +216,18 @@ class CustomPaginationActionsTable extends React.Component {
         const {data, rowsPerPage, page} = this.state;
         const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
         console.log(this.state.statsList)
-        //
-        // if (this.state.statsList.length > 0) {
-        //     console.log("start")
-        //     this.handleStatsOrderArray(this.state.statsList)
-        //
-        //     // this.setState({
-        //     //     data
-        //     // })
-        //
-        // }
+
+        let displayArray=[]
+        if (this.state.statsList.length > 0) {
+            console.log("start")
+             displayArray = this.handleStatsOrderArray(this.state.statsList)
+
+            // this.setState({
+            //     data
+            // })
+
+        }
+        console.log(displayArray)
         //
         // "date": "Liana",
         //     "order": {
