@@ -39,7 +39,7 @@ class Navigation extends Component {
     render() {
         const {classes} = this.props;
         const {value} = this.state;
-        console.log(this.props.userEmail, this.props.userBalance)
+        // console.log(this.props.userEmail, this.props.userBalance)
         return (
             <BottomNavigation
                 value={value}

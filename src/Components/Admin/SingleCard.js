@@ -7,6 +7,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
+import axios from "axios/index";
 
 const styles = theme => ({
 
@@ -83,24 +84,60 @@ class SingleCard extends React.Component {
 
         let adminArray = this.props.adminArray
         adminArray[this.props.card] = this.state.cardData
-        console.log(adminArray)
+        // console.log(adminArray)
 
         this.updateCardData(this.findDish(event.target.value), event.target.name)
-        console.log(this.state.cardData)
-        console.log(this.props.card)
+        // console.log(this.state.cardData)
+        // console.log(this.props.card)
         this.props.onAdminArrayUpdate(adminArray)
         // console.log(this.state)
+
+        // axios.post('')
+        //     .then((response) => {
+        //         // this.props.onListDownload(response.data)
+        //
+        //         // this.orderBlanker(response.data)
+        //         this.setState({
+        //             dishesList: response.data
+        //         })
+        //         // console.log(this.state.dishesList)
+        //     })
+        //     .catch((error) => {
+        //         console.log(error)
+        //     })
+        // axios.post('/post/server', JSON.parse(data))
+        //     .then(function (res) {
+        //         output.className = 'container';
+        //         output.innerHTML = res.data;
+        //     })
+        //     .catch(function (err) {
+        //         output.className = 'container text-danger';
+        //         output.innerHTML = err.message;
+        //     });
+
+        let sendBackendAvailableMenu= {
+            date: this.props.currentDate,
+            availableMenu: this.props.newMenuAdmin
+        }
+            console.log(JSON.stringify(sendBackendAvailableMenu))
+        axios.post('http://localhost:5000/api/availableMenu', JSON.stringify(sendBackendAvailableMenu))
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     };
 
     findDish(temp) {
-        var dishObject
+        let dishObject = ''
         this.props.options.filter(function (dish) {
             if (temp === dish.title) {
                 return dishObject = dish
             }
         });
-        console.log("DISH OBJECT= ")
-        console.log(dishObject)
+        // console.log("DISH OBJECT= ")
+        // console.log(dishObject)
         return dishObject
     }
 
@@ -114,7 +151,7 @@ class SingleCard extends React.Component {
 
 
     render() {
-        console.log("IS DISABLED" + this.props.isDisbled)
+        // console.log("IS DISABLED" + this.props.isDisbled)
         const {classes} = this.props;
         let optionsArray = []
 
@@ -152,7 +189,7 @@ class SingleCard extends React.Component {
 
         return (
             <form autoComplete="off">
-                <FormControl {... this.props.isDisbled?{disabled:true}:{}} className={classes.formControl}>
+                <FormControl {... this.props.isDisbled ? {disabled: true} : {}} className={classes.formControl}>
                     {selectArray}
                 </FormControl>
             </form>
@@ -168,7 +205,9 @@ SingleCard.propTypes = {
 export default connect(
     state => ({
         adminArray: state.newMenuAdmin,
-        userBalance: state.userBalance
+        userBalance: state.userBalance,
+        newMenuAdmin:state.newMenuAdmin,
+        currentDate: state.currentDate
     }),
     dispatch => ({
         onUserBalanceUpdate: (array) => {

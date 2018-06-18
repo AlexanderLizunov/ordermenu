@@ -13,7 +13,7 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
-import {connect} from "react-redux";
+// import {connect} from "react-redux";
 import axios from "axios/index";
 
 const actionsStyles = theme => ({
@@ -168,8 +168,8 @@ class CustomPaginationActionsTable extends React.Component {
                 })
             })
             .then(() => {
-                console.log('STATS')
-                console.log(this.state.statsList)
+                // console.log('STATS')
+                // console.log(this.state.statsList)
                 this.handleStatsOrderArray(this.state.statsList)
             })
             .catch((error) => {
@@ -184,7 +184,7 @@ class CustomPaginationActionsTable extends React.Component {
 
 
     handleStatsOrderArray = (array) => {
-        console.log('array')
+        // console.log('array')
         let finalArray = []
         finalArray = array.map((item) => {
             let finalElement = {
@@ -195,15 +195,15 @@ class CustomPaginationActionsTable extends React.Component {
             let summary = item.order.map((element, index) => {
                 return element.title
             })
-            console.log(summary)
+            // console.log(summary)
             finalElement.date = item.date
             finalElement.orderNumber = item.orderNumber
             finalElement.orderTitle = `${summary}`
             return finalElement
         })
-        console.log(finalArray)
+        // console.log(finalArray)
         // this.onStatsUpdate(finalArray)
-        console.log(this)
+        // console.log(this)
         this.setState({
             displayList: finalArray
         })
@@ -213,20 +213,23 @@ class CustomPaginationActionsTable extends React.Component {
     render() {
         const {classes} = this.props;
         const {data, rowsPerPage, page} = this.state;
-        const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
-        console.log(this.props.statistics)
-        console.log(this.state.displayList)
+        let emptyRows =0
+        // console.log(this.props.statistics)
+        // console.log(this.state.displayList)
 
         let displayArray = []
-        if (this.state.displayList.length>0)
-        displayArray = this.state.displayList.map((item) => {
-                console.log(item.date)
-                console.log(item.orderNumber)
-                console.log(item.orderTitle)
+        if (this.state.displayList.length > 0) {
+            displayArray = this.state.displayList.map((item) => {
+                // console.log(item.date)
+                // console.log(item.orderNumber)
+                // console.log(item.orderTitle)
 
-            return createData(item.date, item.orderNumber, item.orderTitle)
-        })
-        console.log(displayArray)
+                return createData(item.date, item.orderNumber, item.orderTitle)
+            })
+            emptyRows = rowsPerPage - Math.min(rowsPerPage, this.state.displayList.length - page * rowsPerPage);
+        }
+
+        // console.log(displayArray)
 
         return (
             <Paper className={classes.root}>
@@ -234,13 +237,13 @@ class CustomPaginationActionsTable extends React.Component {
                     <Table className={classes.table}>
                         <TableBody>
 
-                                    <TableRow >
-                                        <TableCell component="th" scope="row">
-                                           ДАТА
-                                        </TableCell>
-                                        <TableCell numeric>НОМЕР ОБЕДА</TableCell>
-                                        <TableCell numeric>ОПИСАНИЕ ОБЕДА</TableCell>
-                                    </TableRow>
+                            <TableRow>
+                                <TableCell component="th" scope="row">
+                                    ДАТА
+                                </TableCell>
+                                <TableCell numeric>НОМЕР ОБЕДА</TableCell>
+                                <TableCell numeric>ОПИСАНИЕ ОБЕДА</TableCell>
+                            </TableRow>
                         </TableBody>
                         <TableBody>
 
@@ -285,16 +288,4 @@ CustomPaginationActionsTable.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default connect(
-    state => ({
-        availableMenu: state.availableMenu,
-        isLoggedIn: state.isLoggedIn,
-        date: state.date,
-        statistics: state.statistics
-    }),
-    dispatch => ({
-        onStatsUpdate: (array) => {
-            dispatch({type: 'STATISTICS_UPDATE', payload: array})
-        },
-    })
-)(withStyles(styles)(CustomPaginationActionsTable));
+export default withStyles(styles)(CustomPaginationActionsTable);

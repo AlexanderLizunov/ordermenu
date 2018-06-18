@@ -12,7 +12,7 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-        var today = new Date(),
+        const today = new Date(),
             date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
         this.state = {
             food: [],
@@ -22,7 +22,7 @@ class App extends Component {
     }
 
     componentWillMount() {
-        console.log(this.state.linkId)
+        // console.log(this.state.linkId)
         // localStorage.setItem(key, value);
         if (localStorage.hasOwnProperty('userId')) {
             let userId = localStorage.getItem('userId')
@@ -40,24 +40,24 @@ class App extends Component {
 
     }
 
-    orderBlanker(array) {
-        // console.log(length)
-        let passArray = []
-        array.forEach(function (item, i) {
-            passArray[i] = false
-        });
-        // console.log(passArray)
-        this.props.onOrderUpdate(passArray)
-
-    }
+    // orderBlanker(array) {
+    //     // console.log(length)
+    //     let passArray = []
+    //     array.forEach(function (item, i) {
+    //         passArray[i] = false
+    //     });
+    //     // console.log(passArray)
+    //     this.props.onOrderUpdate(passArray)
+    //
+    // }
 
     getText() {
         axios.get('clients.json')
             .then((response) => {
                 this.props.onListDownload(response.data)
 
-                console.log(this.props.clientList)
-                this.orderBlanker(response.data)
+                // console.log(this.props.clientList)
+                // this.orderBlanker(response.data)
             })
             .catch((error) => {
                 console.log(error)
@@ -65,7 +65,7 @@ class App extends Component {
     }
 
     render() {
-        console.log(this.props.availableMenu)
+        // console.log(this.props.availableMenu)
         return (
             <div className="App">
                 <Navigation/>

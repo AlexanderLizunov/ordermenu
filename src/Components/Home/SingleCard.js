@@ -45,8 +45,7 @@ class SingleCard extends Component {
         // console.log(this.props.number)
         let activeCardClassName
         // if (this.props.orderDishes == this.props.number) {
-
-        if (this.props.orderedMenu == this.props.number) {
+        if (this.props.orderedMenu === String(this.props.number)) {
             activeCardClassName = 'shop-card list-items__active'
         } else {
             activeCardClassName = 'shop-card'

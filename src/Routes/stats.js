@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import Navigation from '../Components/Navigation'
 
 import CustomPaginationActionsTable from '../Components/Statistics/CustomPaginationActionsTable'
-import axios from "axios/index";
+// import axios from "axios/index";
 import {withStyles} from "@material-ui/core/styles/index";
 import {withRouter} from "react-router-dom";
-import {connect} from "react-redux";
+// import {connect} from "react-redux";
 
 
 const styles = theme => ({

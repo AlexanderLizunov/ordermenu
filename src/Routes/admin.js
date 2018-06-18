@@ -62,7 +62,7 @@ class admin extends Component {
 
     handleChange = name => event => {
         this.setState({[name]: event.target.checked});
-        console.log(name, event.target.checked)
+        // console.log(name, event.target.checked)
         //TODO stash to database
 
             this.setState({
@@ -70,12 +70,12 @@ class admin extends Component {
             })
 
         // setTimeout(this.props.history.push("/admin/2"), 1000)
-        console.log("ADMIN IS DISABLED" + this.state.selectionDisabled)
+        // console.log("ADMIN IS DISABLED" + this.state.selectionDisabled)
     };
 
 
     render() {
-        console.log("ADMIN IS DISABLED" + this.state.selectionDisabled)
+        // console.log("ADMIN IS DISABLED" + this.state.selectionDisabled)
 
         let cardsArray = [];
         const {classes} = this.props;
@@ -84,7 +84,7 @@ class admin extends Component {
             // console.log('RENDERING')
             //TODO GET ADMIN ARRAY FROM  BACKEND Else
             // console.log(adminArray)
-            if (adminArray.length == 0) {
+            if (adminArray.length === 0) {
                 for (let cardNum = 0; cardNum <= 3; cardNum++) {
                     adminArray[cardNum] = [
                         {
@@ -109,7 +109,7 @@ class admin extends Component {
                 // console.log(adminArray)
             }
             cardsArray.push(
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={6} key={variable}>
                     <Paper className={classes.paper}>
                         <SingleCard isDisbled={this.state.selectionDisabled} key={variable} card={variable} cardState={adminArray[variable]}
                                     options={this.state.dishesList}/>

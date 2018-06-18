@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 
-// import SingleSelect from '../Components/Admin/SingleSelect'
 import axios from "axios/index";
 
 
@@ -9,12 +8,6 @@ import {withStyles} from "@material-ui/core/styles/index";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
 import BalanceItem from './BalanceItem'
 
 
@@ -56,24 +49,24 @@ class AdminSecond extends Component {
     }
 
     userDisplay(pageNum) {
-        console.log('ОБНОВЛЕНИЕ  СПИСКА ДЛЯ ПОКАЗА')
-        console.log(pageNum)
-        if (this.state.userList !== '') {
+        // console.log('ОБНОВЛЕНИЕ  СПИСКА ДЛЯ ПОКАЗА')
+        // console.log(pageNum)
+        if (this.state.userList  !== '') {
 
             var  usersShown = 8,
                 allUsers = this.state.userList,
                 userList = allUsers.slice(pageNum * usersShown, (pageNum + 1) * usersShown)
 
-            console.log("USER LIST DISPLAY")
-            console.log(userList)
+            // console.log("USER LIST DISPLAY")
+            // console.log(userList)
 
             this.setState({
                 page: pageNum,
                 displayUsers: userList
             })
 
-            console.log(this.state.displayUsers)
-            console.log(this.state.page)
+            // console.log(this.state.displayUsers)
+            // console.log(this.state.page)
         }
 
 
@@ -81,16 +74,16 @@ class AdminSecond extends Component {
 
     componentWillMount() {
         //TODO: LATTER MAKE REQUEST TO SERVER TO GET BALANCE AND EMAIL
-        console.log("WILLMOUNT")
+        // console.log("WILLMOUNT")
 
-        this.getList(0)
+        this.getList()
     }
 
     prevList() {
         let num = this.state.page - 1
         console.log(num)
 
-        if (this.state.page == 0) {
+        if (this.state.page === 0) {
             alert("Первая страница")
         } else {
             this.setState({
@@ -103,17 +96,16 @@ class AdminSecond extends Component {
 
     nextList() {
         let num = this.state.page + 1
-        console.log("NEXT PAGE" + num)
+        // console.log("NEXT PAGE" + num)
         let arrayLength = this.state.userList.length
 
-        console.log(arrayLength
-        )
-        console.log(Math.ceil(arrayLength / 8))
+        // console.log(arrayLength)
+        // console.log(Math.ceil(arrayLength / 8))
 
         if (num <= Math.ceil(arrayLength / 8)) {
 
             this.userDisplay(num)
-            console.log("ПОСЛЕ СТЕЙТА" + this.state.page)
+            // console.log("ПОСЛЕ СТЕЙТА" + this.state.page)
         } else {
             alert("КОНЕЦ СПИСКА")
 
@@ -122,20 +114,20 @@ class AdminSecond extends Component {
 
 
     render() {
-        const {classes} = this.props;
-        console.log("RENDERING")
-        console.log(this.state.displayUsers)
+        // const {classes} = this.props;
+        // console.log("RENDERING")
+        // console.log(this.state.displayUsers)
 
         var userArray = [];
         var pageNum = this.state.page,
             usersShown = 8,
             showUsers = this.state.displayUsers
-        console.log(showUsers)
+        // console.log(showUsers)
 
         if (this.state.displayUsers.length > 0) {
-            console.log(showUsers)
+            // console.log(showUsers)
             userArray = showUsers.map((user, index) =>
-                <BalanceItem user={user} userNumber={index + usersShown * pageNum}/>
+                <BalanceItem key={index} user={user} userNumber={index + usersShown * pageNum}/>
             )
         }
 
