@@ -134,14 +134,14 @@ class CustomPaginationActionsTable extends React.Component {
                 createData('Marshmallow', 318, 0),
                 createData('Nougat', 360, 19.0),
                 createData('Oreo', 437, 18.0),
-            ].sort((a, b) => (a.calories < b.calories ? -1 : 1)),
+            ],
             page: 0,
             rowsPerPage: 5,
             statsList: '',
-            displayList:''
+            displayList: ''
 
         };
-        // this.objectsToString = this.objectsToString.bind(this)
+        // this.onStatsUpdate = this.onStatsUpdate.bind(this)
     }
 
     handleChangePage = (event, page) => {
@@ -151,14 +151,6 @@ class CustomPaginationActionsTable extends React.Component {
     handleChangeRowsPerPage = event => {
         this.setState({rowsPerPage: event.target.value});
     };
-
-    formStatText(array) {
-        var textString
-        array.forEach(function (item, i, arr) {
-            textString = textString + item.title
-        });
-        console.log(textString)
-    }
 
     componentWillReceiveProps(statsList) {
         console.log(this.props.statsList)
@@ -175,6 +167,11 @@ class CustomPaginationActionsTable extends React.Component {
                     statsList: response.data
                 })
             })
+            .then(() => {
+                console.log('STATS')
+                console.log(this.state.statsList)
+                this.handleStatsOrderArray(this.state.statsList)
+            })
             .catch((error) => {
                 console.log(error)
             })
@@ -186,11 +183,10 @@ class CustomPaginationActionsTable extends React.Component {
     }
 
 
-    handleStatsOrderArray(array) {
+    handleStatsOrderArray = (array) => {
         console.log('array')
         let finalArray = []
         finalArray = array.map((item) => {
-            // console.log(item)
             let finalElement = {
                 date: '',
                 orderNumber: '',
@@ -206,57 +202,49 @@ class CustomPaginationActionsTable extends React.Component {
             return finalElement
         })
         console.log(finalArray)
+        // this.onStatsUpdate(finalArray)
+        console.log(this)
+        this.setState({
+            displayList: finalArray
+        })
     }
-
-
 
 
     render() {
         const {classes} = this.props;
         const {data, rowsPerPage, page} = this.state;
         const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
-        console.log(this.state.statsList)
+        console.log(this.props.statistics)
+        console.log(this.state.displayList)
 
-        let displayArray=[]
-        if (this.state.statsList.length > 0) {
-            console.log("start")
-             displayArray = this.handleStatsOrderArray(this.state.statsList)
+        let displayArray = []
+        if (this.state.displayList.length>0)
+        displayArray = this.state.displayList.map((item) => {
+                console.log(item.date)
+                console.log(item.orderNumber)
+                console.log(item.orderTitle)
 
-            // this.setState({
-            //     data
-            // })
-
-        }
+            return createData(item.date, item.orderNumber, item.orderTitle)
+        })
         console.log(displayArray)
-        //
-        // "date": "Liana",
-        //     "order": {
-        //     "orderNumber": "1",
-        //         "orderText":" adadadsasdsd"
-        // }
-
-        // data: [
-        //     createData('Cupcake', 305, 3.7),
-        //     createData('Donut', 452, 25.0),
-        //     createData('Eclair', 262, 16.0),
-        //     createData('Frozen yoghurt', 159, 6.0),
-        //     createData('Gingerbread', 356, 16.0),
-        //     createData('Honeycomb', 408, 3.2),
-        //     createData('Ice cream sandwich', 237, 9.0),
-        //     createData('Jelly Bean', 375, 0.0),
-        //     createData('KitKat', 518, 26.0),
-        //     createData('Lollipop', 392, 0.2),
-        //     createData('Marshmallow', 318, 0),
-        //     createData('Nougat', 360, 19.0),
-        //     createData('Oreo', 437, 18.0),
-        // ].sort((a, b) => (a.calories < b.calories ? -1 : 1)),
 
         return (
             <Paper className={classes.root}>
                 <div className={classes.tableWrapper}>
                     <Table className={classes.table}>
                         <TableBody>
-                            {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(n => {
+
+                                    <TableRow >
+                                        <TableCell component="th" scope="row">
+                                           ДАТА
+                                        </TableCell>
+                                        <TableCell numeric>НОМЕР ОБЕДА</TableCell>
+                                        <TableCell numeric>ОПИСАНИЕ ОБЕДА</TableCell>
+                                    </TableRow>
+                        </TableBody>
+                        <TableBody>
+
+                            {displayArray.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(n => {
                                 return (
                                     <TableRow key={n.id}>
                                         <TableCell component="th" scope="row">
@@ -302,22 +290,11 @@ export default connect(
         availableMenu: state.availableMenu,
         isLoggedIn: state.isLoggedIn,
         date: state.date,
+        statistics: state.statistics
     }),
     dispatch => ({
-        onListDownload: (array) => {
-            dispatch({type: 'LIST_DOWNLOAD', payload: array})
-        },
-        onOrderUpdate: (array) => {
-            dispatch({type: 'ORDER_UPDATE', payload: array})
-        },
-        onUserEmailUpdate: (array) => {
-            dispatch({type: 'USER_EMAIL_UPDATE', payload: array})
-        },
-        onUserBalanceUpdate: (array) => {
-            dispatch({type: 'USER_BALANCE_UPDATE', payload: array})
-        },
-        onDateSet: (array) => {
-            dispatch({type: 'CURRENT_DATE_SET', payload: array})
+        onStatsUpdate: (array) => {
+            dispatch({type: 'STATISTICS_UPDATE', payload: array})
         },
     })
 )(withStyles(styles)(CustomPaginationActionsTable));

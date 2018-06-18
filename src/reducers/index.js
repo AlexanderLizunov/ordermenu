@@ -6,6 +6,7 @@ import currentDate from './currentDate'
 import newMenuAdmin from './newMenuAdmin'
 import orderedMenu from './orderedMenu'
 import userProfile from './userProfile'
+import statistics from './statistics'
 
 
 export default combineReducers({
@@ -14,5 +15,6 @@ export default combineReducers({
     currentDate,
     newMenuAdmin,
     orderedMenu,
+    statistics,
     userProfile
 })
