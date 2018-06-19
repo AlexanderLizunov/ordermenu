@@ -52,20 +52,46 @@ class App extends Component {
     // }
 
     getText() {
-        axios.get('clients.json')
-            .then((response) => {
-                this.props.onListDownload(response.data)
+        // axios.get('clients.json')
+        //     .then((response) => {
+        //         this.props.onListDownload(response.data)
+        //
+        //         // console.log(this.props.clientList)
+        //         // this.orderBlanker(response.data)
+        //     })
+        //     .catch((error) => {
+        //         console.log(error)
+        //     })
 
-                // console.log(this.props.clientList)
-                // this.orderBlanker(response.data)
+        console.log(this.props.currentDate)
+        axios.get('http://localhost:5000/api/availableMenu/' + this.props.currentDate)
+            .then( (response)=> {
+                console.log(response);
+                if (response.data != null) {
+                    console.log("ПОЛУЧИЛ НЕ ПУСТОТУ")
+
+                    console.log(response.data.availableMenu)
+                    // this.props.onAdminArrayUpdate(response.data.availableMenu)
+                    // console.log(this.props.newMenuAdmin)
+                    console.log(this.state    )
+
+                    this.props.onListDownload(response.data.availableMenu)
+                    console.log(this.props.availableMenu)
+                } else {
+                    console.log("ПОЛУЧИЛ  ПУСТОТУ")
+
+                }
+
             })
-            .catch((error) => {
-                console.log(error)
-            })
+            .catch(function (error) {
+                // console.log(error);
+            });
     }
 
     render() {
-        // console.log(this.props.availableMenu)
+        console.log("APP RENDER")
+        console.log(this.props.availableMenu)
+        console.log(this.props)
         return (
             <div className="App">
                 <Navigation/>
@@ -80,6 +106,7 @@ export default connect(
         availableMenu: state.availableMenu,
         isLoggedIn: state.isLoggedIn,
         date: state.date,
+        currentDate: state.currentDate
     }),
     dispatch => ({
         onListDownload: (array) => {

@@ -78,9 +78,6 @@ class SingleCard extends React.Component {
         console.log(
             updatingStateQuery[currentCardNumber]
         )
-        // if (1){
-        //
-        // }
         this.setState({
             dish: updatingStateQuery[currentCardNumber]
         })
@@ -108,8 +105,8 @@ class SingleCard extends React.Component {
         this.updateCardData(this.findDish(event.target.value), event.target.name)
         // console.log(this.state.cardData)
         // console.log(this.props.card)
-        // this.props.onAdminArrayUpdate(adminArray)
-        // console.log(this.state)
+        this.props.onAdminArrayUpdate(adminArray)
+        console.log(this.props)
 
         let sendBackendAvailableMenu = {
             date: this.props.currentDate,

@@ -58,14 +58,16 @@ class admin extends Component {
 
     getCurrentMenuList() {
         axios.get('http://localhost:5000/api/availableMenu/' + this.props.currentDate)
-            .then(function (response) {
+            .then( (response)=> {
                 console.log(response);
                 if (response.data != null) {
                     console.log("ПОЛУЧИЛ НЕ ПУСТОТУ")
 
                     console.log(response.data.availableMenu)
-                    this.props.onAdminArrayUpdate(response.data.availableMenu)
-                    console.log(this.props.newMenuAdmin)
+                    // this.props.onAdminArrayUpdate(response.data.availableMenu)
+                    // console.log(this.props.newMenuAdmin)
+                    this.props.onListDownload(response.data.availableMenu)
+                    console.log(this.props.availableMenu)
                 } else {
                     console.log("ПОЛУЧИЛ  ПУСТОТУ")
 
@@ -100,6 +102,8 @@ class admin extends Component {
 
     render() {
         // console.log("ADMIN IS DISABLED" + this.state.selectionDisabled)
+        console.log("V RENDERE AVAILABLE MENU")
+        console.log(this.props)
 
         let cardsArray = [];
         const {classes} = this.props;
@@ -185,9 +189,14 @@ export default connect(
     state => ({
         adminArray: state.newMenuAdmin,
         userBalance: state.userBalance,
-        currentDate: state.currentDate
+        currentDate: state.currentDate,
+        availableMenu: state.availableMenu,
+
     }),
     dispatch => ({
+        onListDownload: (array) => {
+            dispatch({type: 'AVAILABLE_MENU_DOWNLOAD', payload: array})
+        },
         onUserBalanceUpdate: (array) => {
             dispatch({type: 'USER_BALANCE_UPDATE', payload: array})
         },

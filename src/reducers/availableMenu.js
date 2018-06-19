@@ -1,4 +1,4 @@
-const initialState = ''
+const initialState = []
 
 export default function availableMenu(state = initialState, action) {
     if (action.type === 'AVAILABLE_MENU_DOWNLOAD') {

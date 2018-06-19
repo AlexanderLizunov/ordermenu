@@ -4,6 +4,7 @@ import {Grid} from 'semantic-ui-react'
 import {List} from 'semantic-ui-react'
 import SingleDish from "./SingleDish";
 import {connect} from "react-redux";
+import axios from "axios/index";
 
 
 class SingleCard extends Component {
@@ -32,11 +33,21 @@ class SingleCard extends Component {
                 // console.log(this.state)
                 // console.log(this.props.dishes)
                 //TODO LATER SEND TO BACKEND
-                this.props.onStoreOrder(this.props.dishes.dishes)
+                this.props.onStoreOrder(this.props.dishes)
+                axios.put('http://localhost:5000/api/storeOrders/'+this.props.currentDate, this.props.BACKEND_ORDER_DATE_ORDER_STORE)
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+
                 return;
             }
             target = target.parentNode;
         }
+
     }
 
     render() {
@@ -50,10 +61,12 @@ class SingleCard extends Component {
         } else {
             activeCardClassName = 'shop-card'
         }
-        let supplierListArray = this.props.dishes.dishes;
+        console.log("DISHES")
+        console.log(this.props.dishes)
+        let supplierListArray = this.props.dishes;
         let supplierList;
         supplierList = supplierListArray.map((dishes, index) =>
-            <SingleDish key={index} image={dishes.avatar} title={dishes.firstName}/>
+            <SingleDish key={index} image={dishes.image} title={dishes.title}/>
         );
 
         return (
@@ -78,7 +91,7 @@ export default connect(
         availableMenu: state.availableMenu,
         orderedMenu: state.orderedMenu,
         currentDate: state.currentDate,
-        BACKEND_ORDER_DATE_ORDER_STORE: state.BACKEND_ORDER_DATE_ORDER_STORE,
+        BACKEND_ORDER_DATE_ORDER_STORE: state.BACKEND_ORDER_DATE_ORDER_STORE
     }),
     dispatch => ({
         onOrderUpdate: (array) => {

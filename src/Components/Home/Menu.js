@@ -16,6 +16,7 @@ class Menu extends Component {
     render() {
 
         const foodArray = this.props.value;
+        console.log(this.props.value)
         let listItems = [];
         // console.log(this.props.value)
         if (foodArray.length > 0) {
