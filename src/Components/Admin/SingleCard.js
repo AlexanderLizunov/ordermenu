@@ -31,26 +31,26 @@ class SingleCard extends React.Component {
             cardData: [
                 {
                     title: '',
-                    avatar: ''
+                    image: ''
                 },
                 {
                     title: '',
-                    avatar: ''
+                    image: ''
                 },
                 {
                     title: '',
-                    avatar: ''
+                    image: ''
                 },
                 {
                     title: '',
-                    avatar: ''
+                    image: ''
                 },
             ],
             cardSelect1: '',
             cardSelect2: '',
             cardSelect3: '',
             cardSelect4: '',
-            dish: [],
+            dish:[],
 
         }
     }
@@ -68,6 +68,25 @@ class SingleCard extends React.Component {
         });
         console.log(this.state.cardData)
     }
+
+    componentWillMount(){
+
+        console.log(this.props.newMenuAdmin)
+
+        const updatingStateQuery= this.props.newMenuAdmin,
+                currentCardNumber= this.props.card
+        console.log(
+            updatingStateQuery[currentCardNumber]
+        )
+        // if (1){
+        //
+        // }
+        this.setState({
+            dish: updatingStateQuery[currentCardNumber]
+        })
+    }
+
+
 
     handleChange = event => {
         // console.log(event.getAttribute('data-orderid'));
@@ -89,38 +108,15 @@ class SingleCard extends React.Component {
         this.updateCardData(this.findDish(event.target.value), event.target.name)
         // console.log(this.state.cardData)
         // console.log(this.props.card)
-        this.props.onAdminArrayUpdate(adminArray)
+        // this.props.onAdminArrayUpdate(adminArray)
         // console.log(this.state)
 
-        // axios.post('')
-        //     .then((response) => {
-        //         // this.props.onListDownload(response.data)
-        //
-        //         // this.orderBlanker(response.data)
-        //         this.setState({
-        //             dishesList: response.data
-        //         })
-        //         // console.log(this.state.dishesList)
-        //     })
-        //     .catch((error) => {
-        //         console.log(error)
-        //     })
-        // axios.post('/post/server', JSON.parse(data))
-        //     .then(function (res) {
-        //         output.className = 'container';
-        //         output.innerHTML = res.data;
-        //     })
-        //     .catch(function (err) {
-        //         output.className = 'container text-danger';
-        //         output.innerHTML = err.message;
-        //     });
-
-        let sendBackendAvailableMenu= {
+        let sendBackendAvailableMenu = {
             date: this.props.currentDate,
             availableMenu: this.props.newMenuAdmin
         }
-            console.log(JSON.stringify(sendBackendAvailableMenu))
-        axios.post('http://localhost:5000/api/availableMenu', JSON.stringify(sendBackendAvailableMenu))
+        console.log(sendBackendAvailableMenu)
+        axios.put('http://localhost:5000/api/availableMenu/'+this.props.currentDate, sendBackendAvailableMenu)
             .then(function (response) {
                 console.log(response);
             })
@@ -206,7 +202,7 @@ export default connect(
     state => ({
         adminArray: state.newMenuAdmin,
         userBalance: state.userBalance,
-        newMenuAdmin:state.newMenuAdmin,
+        newMenuAdmin: state.newMenuAdmin,
         currentDate: state.currentDate
     }),
     dispatch => ({

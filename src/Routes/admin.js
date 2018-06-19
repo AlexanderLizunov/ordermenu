@@ -41,6 +41,7 @@ class admin extends Component {
 
     getList() {
         axios.get('../dishes.json')
+
             .then((response) => {
                 // this.props.onListDownload(response.data)
 
@@ -55,9 +56,32 @@ class admin extends Component {
             })
     }
 
+    getCurrentMenuList() {
+        axios.get('http://localhost:5000/api/availableMenu/' + this.props.currentDate)
+            .then(function (response) {
+                console.log(response);
+                if (response.data != null) {
+                    console.log("ПОЛУЧИЛ НЕ ПУСТОТУ")
+
+                    console.log(response.data.availableMenu)
+                    this.props.onAdminArrayUpdate(response.data.availableMenu)
+                    console.log(this.props.newMenuAdmin)
+                } else {
+                    console.log("ПОЛУЧИЛ  ПУСТОТУ")
+
+                }
+
+            })
+            .catch(function (error) {
+                // console.log(error);
+            });
+    }
+
     componentWillMount() {
         //TODO: LATTER MAKE REQUEST TO SERVER TO GET BALANCE AND EMAIL
+
         this.getList()
+        this.getCurrentMenuList()
     }
 
     handleChange = name => event => {
@@ -65,9 +89,9 @@ class admin extends Component {
         // console.log(name, event.target.checked)
         //TODO stash to database
 
-            this.setState({
-                selectionDisabled: !this.state.selectionDisabled
-            })
+        this.setState({
+            selectionDisabled: !this.state.selectionDisabled
+        })
 
         // setTimeout(this.props.history.push("/admin/2"), 1000)
         // console.log("ADMIN IS DISABLED" + this.state.selectionDisabled)
@@ -89,19 +113,19 @@ class admin extends Component {
                     adminArray[cardNum] = [
                         {
                             title: '',
-                            avatar: ''
+                            image: ''
                         },
                         {
                             title: '',
-                            avatar: ''
+                            image: ''
                         },
                         {
                             title: '',
-                            avatar: ''
+                            image: ''
                         },
                         {
                             title: '',
-                            avatar: ''
+                            image: ''
                         },
                     ]
                 }
@@ -111,7 +135,8 @@ class admin extends Component {
             cardsArray.push(
                 <Grid item xs={12} sm={6} key={variable}>
                     <Paper className={classes.paper}>
-                        <SingleCard isDisbled={this.state.selectionDisabled} key={variable} card={variable} cardState={adminArray[variable]}
+                        <SingleCard isDisbled={this.state.selectionDisabled} key={variable} card={variable}
+                                    cardState={adminArray[variable]}
                                     options={this.state.dishesList}/>
                     </Paper>
                 </Grid>
@@ -159,7 +184,8 @@ class admin extends Component {
 export default connect(
     state => ({
         adminArray: state.newMenuAdmin,
-        userBalance: state.userBalance
+        userBalance: state.userBalance,
+        currentDate: state.currentDate
     }),
     dispatch => ({
         onUserBalanceUpdate: (array) => {
