@@ -5,13 +5,18 @@ import {List} from 'semantic-ui-react'
 import SingleDish from "./SingleDish";
 import {connect} from "react-redux";
 import axios from "axios/index";
+import BACKEND_ORDER_DATE_ORDER_STORE from "../../reducers/BACKEND_ORDER_DATE_ORDER_STORE";
 
 
 class SingleCard extends Component {
+
     constructor(props) {
         super(props)
+        const today = new Date(),
+            date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
         this.state = {
-            orderId: this.props.orderMenu
+            orderId: this.props.orderMenu,
+            currentDate: date
         }
     }
 
@@ -32,9 +37,28 @@ class SingleCard extends Component {
                 })
                 // console.log(this.state)
                 // console.log(this.props.dishes)
-                //TODO LATER SEND TO BACKEND
                 this.props.onStoreOrder(this.props.dishes)
-                axios.put('http://localhost:5000/api/storeOrders/'+this.props.currentDate, this.props.BACKEND_ORDER_DATE_ORDER_STORE)
+                //SENDING TO BACKEND
+                let userEmail = localStorage.getItem('userEmail')
+                let orderArray = this.props.dishes
+                    orderArray.forEach((element)=>{
+                        console.log(element)
+
+                            delete element._id
+                        console.log(element)
+                    })
+
+                const sendToBackEndData = {
+                    date: this.state.currentDate,
+                    email: userEmail,
+                    orderNumber: target.getAttribute('data-orderid'),
+                    order: orderArray
+
+                }
+
+                console.log("sendToBackEndData")
+                console.log(sendToBackEndData)
+                axios.put('http://localhost:5000/api/orderStore/'+userEmail, sendToBackEndData)
                     .then(function (response) {
                         console.log(response);
                     })

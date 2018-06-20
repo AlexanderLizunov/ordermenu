@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f5b8f6b4-1ac0-4e3d-86c4-62d250564f96" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="8794364a-393c-409d-b180-37cc2896a89e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Admin/SingleCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Admin/SingleCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Home/Menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Home/Menu.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Home/SingleCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Home/SingleCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Routes/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/admin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/availableMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/availableMenu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/newMenuAdmin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/newMenuAdmin.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -25,12 +16,49 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="SingleCard.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Components/Admin/SingleCard.js">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="ordersStore.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/ordersStore.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
-              <caret line="121" column="15" lean-forward="true" selection-start-line="115" selection-start-column="8" selection-end-line="121" selection-end-column="15" />
+            <state relative-caret-position="380">
+              <caret line="20" column="7" selection-start-line="3" selection-start-column="3" selection-end-line="20" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Menu.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/Home/Menu.js">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="SingleCard.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Components/Home/SingleCard.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="403">
+              <caret line="62" column="42" selection-start-line="62" selection-start-column="42" selection-end-line="62" selection-end-column="42" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Routes/login.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SignInForm.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/SignInForm.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="950">
+              <caret line="58" column="59" lean-forward="true" selection-start-line="58" selection-start-column="16" selection-end-line="58" selection-end-column="59" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -38,40 +66,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BACKEND_ORDER_DATE_ORDER_STORE.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/reducers/BACKEND_ORDER_DATE_ORDER_STORE.js">
+      <file leaf-file-name="SingleDish.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/Home/SingleDish.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="2" column="38" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="54" />
+            <state>
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AdminSecond.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/Admin/AdminSecond.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/reducers/index.js">
+        <entry file="file://$PROJECT_DIR$/src/Routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="3" column="76" selection-start-line="3" selection-start-column="76" selection-end-line="3" selection-end-column="76" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="availableMenu.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/reducers/availableMenu.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="80">
-              <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="admin.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Routes/admin.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="85" column="21" lean-forward="true" selection-start-line="85" selection-start-column="21" selection-end-line="85" selection-end-column="21" />
+            <state>
               <folding>
-                <element signature="e#0#39#0" expanded="true" />
+                <element signature="n#!!doc" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -80,50 +102,11 @@
       <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="67" column="31" selection-start-line="67" selection-start-column="31" selection-end-line="67" selection-end-column="31" />
+            <state relative-caret-position="152">
+              <caret line="15" column="94" lean-forward="true" selection-start-line="14" selection-start-column="8" selection-end-line="15" selection-end-column="94" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SingleCard.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Components/Home/SingleCard.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="36" column="102" selection-start-line="36" selection-start-column="102" selection-end-line="36" selection-end-column="102" />
-              <folding>
-                <element signature="e#0#39#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ordersStore.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/ordersStore.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20">
-              <caret line="1" column="3" selection-start-line="1" selection-start-column="3" selection-end-line="1" selection-end-column="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="userStats.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/userStats.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="80">
-              <caret line="4" column="7" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret lean-forward="true" />
             </state>
           </provider>
         </entry>
@@ -132,13 +115,7 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>this.props.newMenuAdmin</find>
-      <find>orderB</find>
-      <find>order:</find>
-      <find>food</find>
-      <find>setS</find>
-      <find>onAdminArrayUpdate</find>
-      <find>dishes.</find>
+      <find>stora</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -147,16 +124,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Components/Admin/SingleCard.js" />
-        <option value="$PROJECT_DIR$/src/reducers/newMenuAdmin.js" />
-        <option value="$PROJECT_DIR$/src/index.js" />
-        <option value="$PROJECT_DIR$/src/Components/Home/Menu.js" />
-        <option value="$PROJECT_DIR$/src/reducers/availableMenu.js" />
-        <option value="$PROJECT_DIR$/src/App.js" />
-        <option value="$PROJECT_DIR$/src/Routes/admin.js" />
-        <option value="$PROJECT_DIR$/src/reducers/index.js" />
         <option value="$PROJECT_DIR$/src/Components/Home/SingleCard.js" />
-        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -171,10 +139,16 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/package.json" />
+    </packageJsonPaths>
+  </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="463" />
-    <option name="width" value="1224" />
-    <option name="height" value="1017" />
+    <option name="x" value="732" />
+    <option name="y" value="24" />
+    <option name="width" value="1188" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -222,12 +196,6 @@
               <item name="ordermenu" type="b2602c69:ProjectViewProjectNode" />
               <item name="ordermenu" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="reducers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ordermenu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ordermenu" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Routes" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -239,10 +207,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="node.js.detected.package.prettier" value="true" />
-    <property name="node.js.path.for.package.prettier" value="project" />
-    <property name="node.js.selected.package.prettier" value="" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../archive/node_express" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -263,40 +228,41 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f5b8f6b4-1ac0-4e3d-86c4-62d250564f96" name="Default" comment="" />
-      <created>1529431594048</created>
+      <changelist id="8794364a-393c-409d-b180-37cc2896a89e" name="Default" comment="" />
+      <created>1529474643188</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1529431594048</updated>
-      <workItem from="1529431595543" duration="5946000" />
+      <updated>1529474643188</updated>
+      <workItem from="1529474644376" duration="7118000" />
+      <workItem from="1529498865458" duration="1473000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5946000" />
+    <option name="totallyTimeSpent" value="8591000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
+    <frame x="64" y="-11" width="1857" height="1092" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17380808" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info id="npm" side_tool="true" />
+      <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.45495495" />
-      <window_info id="Favorites" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.23667377" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -306,12 +272,47 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/reducers/userProfile.js">
+    <entry file="file://$PROJECT_DIR$/public/ordersStore.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="20" column="7" lean-forward="true" selection-start-line="3" selection-start-column="3" selection-end-line="20" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Home/Menu.js">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Routes/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/SignInForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="950">
+          <caret line="58" column="59" lean-forward="true" selection-start-line="58" selection-start-column="16" selection-end-line="58" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Home/SingleDish.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Admin/AdminSecond.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3089">
+        <state>
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
@@ -327,112 +328,99 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="41" column="25" lean-forward="true" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Home/Menu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="18" column="37" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/reducers/newMenuAdmin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="3" column="30" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/reducers/availableMenu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="67" column="31" selection-start-line="67" selection-start-column="31" selection-end-line="67" selection-end-column="31" />
+        <state relative-caret-position="152">
+          <caret line="15" column="94" lean-forward="true" selection-start-line="14" selection-start-column="8" selection-end-line="15" selection-end-column="94" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/reducers/index.js">
+    <entry file="file://$PROJECT_DIR$/src/Components/Home/SingleCard.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="3" column="76" selection-start-line="3" selection-start-column="76" selection-end-line="3" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/reducers/BACKEND_ORDER_DATE_ORDER_STORE.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="2" column="38" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Routes/admin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="85" column="21" lean-forward="true" selection-start-line="85" selection-start-column="21" selection-end-line="85" selection-end-column="21" />
+        <state relative-caret-position="1045">
+          <caret line="62" column="42" lean-forward="true" selection-start-line="62" selection-start-column="42" selection-end-line="62" selection-end-column="42" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Admin/SingleCard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="121" column="15" lean-forward="true" selection-start-line="115" selection-start-column="8" selection-end-line="121" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/ordersStore.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="1" column="3" selection-start-line="1" selection-start-column="3" selection-end-line="1" selection-end-column="3" />
+        <state relative-caret-position="380">
+          <caret line="20" column="7" selection-start-line="3" selection-start-column="3" selection-end-line="20" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/userStats.json">
+    <entry file="file://$PROJECT_DIR$/src/Components/Home/SingleDish.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="4" column="7" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Home/SingleCard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="36" column="102" selection-start-line="36" selection-start-column="102" selection-end-line="36" selection-end-column="102" />
+        <state>
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/src/Components/Admin/AdminSecond.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret lean-forward="true" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Routes/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Home/Menu.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Routes/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/SignInForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="950">
+          <caret line="58" column="59" lean-forward="true" selection-start-line="58" selection-start-column="16" selection-end-line="58" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="15" column="94" lean-forward="true" selection-start-line="14" selection-start-column="8" selection-end-line="15" selection-end-column="94" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Home/SingleCard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="62" column="42" selection-start-line="62" selection-start-column="42" selection-end-line="62" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
