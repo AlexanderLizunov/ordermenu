@@ -108,9 +108,18 @@ class SingleCard extends React.Component {
         this.props.onAdminArrayUpdate(adminArray)
         console.log(this.props)
 
+        // PREPARING  FOR SENDING TO BACKEND
+        let arrayForSendingMenus = this.props.newMenuAdmin
+        arrayForSendingMenus.forEach((element)=>{
+            console.log(element)
+
+            delete element._id
+            console.log(element)
+        })
+
         let sendBackendAvailableMenu = {
             date: this.props.currentDate,
-            availableMenu: this.props.newMenuAdmin
+            availableMenu: arrayForSendingMenus
         }
         console.log(sendBackendAvailableMenu)
         axios.put('http://localhost:5000/api/availableMenu/'+this.props.currentDate, sendBackendAvailableMenu)
@@ -120,6 +129,7 @@ class SingleCard extends React.Component {
             .catch(function (error) {
                 console.log(error);
             });
+
     };
 
     findDish(temp) {
