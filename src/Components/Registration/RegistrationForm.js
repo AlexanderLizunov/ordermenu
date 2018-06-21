@@ -1,6 +1,6 @@
 import React from 'react';
 import {withRouter} from "react-router-dom";
-import uuid from 'uuid';
+// import uuid from 'uuid';
 
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 
 import Button from '@material-ui/core/Button';
 import {connect} from "react-redux";
+import axios from "axios/index";
 
 const styles = theme => ({
     container: {
@@ -63,21 +64,56 @@ class RegistrationForm extends React.Component {
     handleSubmit(e) {
         e.preventDefault()
         if (this.state.password === this.state.repassword && this.state.password.length > 0 && this.state.email !== '') {
+            const sendToBackendUserInfo = {
+                email: this.state.email,
+                password: this.state.password,
+                emailVerified: "false",
+                balance: "0"
+            }
+
+
+            axios.get('http://localhost:5000/api/user/' + this.state.email)
+                .then((response) => {
+                    if (response.data) {
+                        alert("Пользователь с таким имейлом существует")
+                    } else {
+                        axios.post('http://localhost:5000/api/users/', sendToBackendUserInfo)
+                            .then((response)=> {
+                                console.log(response);
+                                localStorage.setItem('userEmail', this.state.email);
+                                localStorage.setItem('id', response.data._id);
+
+                                this.props.history.push("/")
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
+
+                    }
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+
+
+
+
             console.log('welldone')
-            const idValue = uuid.v1()
-            this.props.onUserIdUpdate(idValue);
+            // const idValue = uuid.v1()
+            // this.props.onUserIdUpdate(idValue);
             //TODO: LATTER WILL BE RECEIVED FROM SERVER
-            this.props.onUserBalanceUpdate('50$');
-            this.props.onUserEmailUpdate(this.state.email);
+            // this.props.onUserBalanceUpdate('50$');
+            // this.props.onUserEmailUpdate(this.state.email);
 
-            console.log('LINK ID FOR EMAIL'+  idValue)
-            localStorage.setItem('userId',  idValue);
+            // console.log('LINK ID FOR EMAIL' + idValue)
+            // localStorage.setItem('userId', idValue);
 
-            console.log('user emails to localstorage' + this.state.email)
-            localStorage.setItem('userEmail',  this.state.email);
-            localStorage.setItem('userBalance',  '50$');
+            // console.log('user emails to localstorage' + this.state.email)
+            // localStorage.setItem('userEmail', this.state.email);
+            // localStorage.setItem('userEmail', this.state.email);
 
-            setTimeout(this.props.history.push("/"), 1000)
         } else {
             alert('CHECK FORM FIELDS')
         }

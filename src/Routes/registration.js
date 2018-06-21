@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
 
-import RegistrationForm from '../Components/RegistrationForm'
+import RegistrationForm from '../Components/Registration/RegistrationForm'
 
 
 class registration extends Component {

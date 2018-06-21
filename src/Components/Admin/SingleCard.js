@@ -8,6 +8,9 @@ import Select from '@material-ui/core/Select';
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import axios from "axios/index";
+import Avatar from '@material-ui/core/Avatar';
+import classNames from 'classnames';
+
 
 const styles = theme => ({
 
@@ -18,6 +21,17 @@ const styles = theme => ({
     formControl: {
         margin: theme.spacing.unit,
         minWidth: 120,
+    },
+    row: {
+        display: 'flex',
+        justifyContent: 'center',
+    },
+    avatar: {
+        margin: 0,
+    },
+    bigAvatar: {
+        width: 40,
+        height: 40,
     },
 });
 
@@ -50,7 +64,7 @@ class SingleCard extends React.Component {
             cardSelect2: '',
             cardSelect3: '',
             cardSelect4: '',
-            dish:[],
+            dish: "",
 
         }
     }
@@ -66,68 +80,97 @@ class SingleCard extends React.Component {
         this.setState({
             cardData: tempCardData
         });
-        console.log(this.state.cardData)
+        //console.log(this.state.cardData)
     }
 
-    componentWillMount(){
+    componentWillMount() {
+        console.log("SingleCard MOUNT")
+        console.log("STATE")
+        console.log(this.state)
+        console.log("PROPS")
+        console.log(this.props)
 
-        console.log(this.props.newMenuAdmin)
 
-        const updatingStateQuery= this.props.newMenuAdmin,
-                currentCardNumber= this.props.card
-        console.log(
-            updatingStateQuery[currentCardNumber]
-        )
-        this.setState({
-            dish: updatingStateQuery[currentCardNumber]
-        })
+        // //console.log(this.props.newMenuAdmin)
+        //
+        const currentCardNumber = this.props.card,
+            updatingStateQuery = this.props.newMenuAdmin
+        // //console.log(
+        //     updatingStateQuery[currentCardNumber]
+        // )
+        // this.setState({
+        //     dish: updatingStateQuery[currentCardNumber]
+        // })
+        // axios.get('http://localhost:5000/api/availableMenu/' + this.props.currentDate)
+        //     .then((response) => {
+        //         this.setState({
+        //             dish: response.data.availableMenu[currentCardNumber]
+        //         })
+        //     })
+        //     .catch(function (error) {
+        //         let backupEmpty = this.state.cardData
+        //         //console.log('')
+        //         this.setState({
+        //             dish: backupEmpty
+        //         })
+        //     });
     }
-
 
 
     handleChange = event => {
-        // console.log(event.getAttribute('data-orderid'));
-        let b = this.state.dish
-        // console.log(b[2])
-        b[event.target.name] = event.target.value
-        // console.log(event.target.name)
-        // console.log(event.target.value)
-        // console.log(this.state.card)
+
+        // //console.log(event.getAttribute('data-orderid'));
+        let b = this.props.cardState
+        // //console.log(b[2])
+        // b[event.target.name].title = event.target.value
+        b[event.target.name] = this.findDish(event.target.value)
+        console.log(b)
+        // //console.log(event.target.name)
+        // //console.log(event.target.value)
+        // //console.log(this.state.card)
 
         this.setState({
             dish: b
         });
-
+        //
         let adminArray = this.props.adminArray
-        adminArray[this.props.card] = this.state.cardData
-        // console.log(adminArray)
+        console.log(adminArray)
 
-        this.updateCardData(this.findDish(event.target.value), event.target.name)
-        // console.log(this.state.cardData)
-        // console.log(this.props.card)
+        adminArray[this.props.card] = b
+        console.log(adminArray)
+        //
+        // this.updateCardData(this.findDish(event.target.value), event.target.name)
+        // // //console.log(this.state.cardData)
+        // // //console.log(this.props.card)
         this.props.onAdminArrayUpdate(adminArray)
-        console.log(this.props)
-
+        // //console.log(this.props)
+        //
         // PREPARING  FOR SENDING TO BACKEND
         let arrayForSendingMenus = this.props.newMenuAdmin
-        arrayForSendingMenus.forEach((element)=>{
+        arrayForSendingMenus.forEach((element) => {
             console.log(element)
+            if (element.hasOwnProperty("_id")) {
+                delete element._id
 
-            delete element._id
-            console.log(element)
+            }
+            //console.log(element)
         })
 
         let sendBackendAvailableMenu = {
             date: this.props.currentDate,
             availableMenu: arrayForSendingMenus
         }
+
+        console.log("sendBackendAvailableMenu")
         console.log(sendBackendAvailableMenu)
-        axios.put('http://localhost:5000/api/availableMenu/'+this.props.currentDate, sendBackendAvailableMenu)
+
+        // //console.log(sendBackendAvailableMenu)
+        axios.put('http://localhost:5000/api/availableMenu/' + this.props.currentDate, sendBackendAvailableMenu)
             .then(function (response) {
-                console.log(response);
+                //console.log(response);
             })
             .catch(function (error) {
-                console.log(error);
+                //console.log(error);
             });
 
     };
@@ -139,8 +182,8 @@ class SingleCard extends React.Component {
                 return dishObject = dish
             }
         });
-        // console.log("DISH OBJECT= ")
-        // console.log(dishObject)
+        // //console.log("DISH OBJECT= ")
+        // //console.log(dishObject)
         return dishObject
     }
 
@@ -154,7 +197,9 @@ class SingleCard extends React.Component {
 
 
     render() {
-        // console.log("IS DISABLED" + this.props.isDisbled)
+        console.log("IS DISABLED" + this.props)
+        console.log(this.props)
+        console.log(this.state)
         const {classes} = this.props;
         let optionsArray = []
 
@@ -167,31 +212,81 @@ class SingleCard extends React.Component {
             )
         }
 
-        var selectArray = []
-        for (let variable = 0; variable <= 3; variable++) {
-            let b = this.state.dish
+        let selectArray = []
+        if (this.state.dish.length > 1) {
 
-            selectArray.push(
-                <Select
-                    key={variable}
-                    open={this.state.open}
-                    onClose={this.handleClose}
-                    onOpen={this.handleOpen}
-                    value={b[variable]}
-                    onChange={this.handleChange}
-                    inputProps={{
-                        name: variable,
-                        id: 'demo-controlled-open-select',
-                    }}
-                >
-                    {optionsArray}
-                </Select>
-            )
+            this.state.dish.forEach((dish, variable) => {
+                let b = this.state.dish[variable]
+
+                //console.log(" RENDER CARDSTATE DISH")
+                //console.log(this.state.dish)
+                selectArray.push(
+                    <div className="admin-card-item">
+                            <div className="admin-card-image-cover">
+                                <Avatar
+                                    alt="Пусто"
+                                    src={b.image}
+                                    className={classNames(classes.avatar, classes.bigAvatar)}
+                                />
+                            </div>
+
+                        <Select
+                            key={variable}
+                            open={this.state.open}
+                            onClose={this.handleClose}
+                            onOpen={this.handleOpen}
+                            value={b.title}
+                            onChange={this.handleChange}
+                            inputProps={{
+                                name: variable,
+                                id: 'demo-controlled-open-select',
+                            }}
+                        >
+                            {optionsArray}
+                        </Select>
+                    </div>
+                )
+            })
+        } else if (this.props.cardState != undefined) {
+            this.props.cardState.forEach((dish, variable) => {
+                let b = this.props.cardState[variable]
+
+                //console.log(" RENDER CARDSTATE DISH")
+                //console.log(this.state.dish)
+                selectArray.push(
+                    <div className="admin-card-item">
+
+                        <div className="admin-card-image-cover">
+                            <Avatar
+                                alt="Пусто"
+                                src={b.image}
+                                className={classNames(classes.avatar, classes.bigAvatar)}
+                            />
+                        </div>
+
+                        <Select
+                            key={variable}
+                            open={this.state.open}
+                            onClose={this.handleClose}
+                            onOpen={this.handleOpen}
+                            value={b.title}
+                            onChange={this.handleChange}
+                            inputProps={{
+                                name: variable,
+                                id: 'demo-controlled-open-select',
+                            }}
+                            className="admin-card-select-cover"
+                        >
+                            {optionsArray}
+                        </Select>
+                    </div>
+                )
+            })
         }
 
 
         return (
-            <form autoComplete="off">
+            <form className="admin-card-cover" autoComplete="off">
                 <FormControl {... this.props.isDisbled ? {disabled: true} : {}} className={classes.formControl}>
                     {selectArray}
                 </FormControl>

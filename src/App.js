@@ -24,7 +24,7 @@ class App extends Component {
     componentWillMount() {
         // console.log(this.state.linkId)
         // localStorage.setItem(key, value);
-        if (localStorage.hasOwnProperty('userId')) {
+        if (localStorage.hasOwnProperty('id')) {
             let userId = localStorage.getItem('userId')
             console.log("localstoage have data ID: " + userId)
             //TODO: LATTER MAKE REQUEST TO SERVER TO GET BALANCE AND EMAIL
@@ -40,28 +40,7 @@ class App extends Component {
 
     }
 
-    // orderBlanker(array) {
-    //     // console.log(length)
-    //     let passArray = []
-    //     array.forEach(function (item, i) {
-    //         passArray[i] = false
-    //     });
-    //     // console.log(passArray)
-    //     this.props.onOrderUpdate(passArray)
-    //
-    // }
-
     getText() {
-        // axios.get('clients.json')
-        //     .then((response) => {
-        //         this.props.onListDownload(response.data)
-        //
-        //         // console.log(this.props.clientList)
-        //         // this.orderBlanker(response.data)
-        //     })
-        //     .catch((error) => {
-        //         console.log(error)
-        //     })
 
         console.log(this.props.currentDate)
         axios.get('http://localhost:5000/api/availableMenu/' + this.props.currentDate)
@@ -84,7 +63,7 @@ class App extends Component {
 
             })
             .catch(function (error) {
-                // console.log(error);
+                console.log(error);
             });
     }
 

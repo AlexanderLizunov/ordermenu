@@ -35,7 +35,9 @@ class admin extends Component {
         this.state = {
             dishesList: '',
             checkedB: true,
-            selectionDisabled: false
+            selectionDisabled: false,
+            cardsArray: []
+
         }
     }
 
@@ -49,34 +51,40 @@ class admin extends Component {
                 this.setState({
                     dishesList: response.data
                 })
-                // console.log(this.state.dishesList)
+                // ////console.log(this.state.dishesList)
             })
             .catch((error) => {
-                console.log(error)
+                //console.log(error)
             })
     }
 
     getCurrentMenuList() {
         axios.get('http://localhost:5000/api/availableMenu/' + this.props.currentDate)
-            .then( (response)=> {
-                console.log(response);
+            .then((response) => {
+                //console.log(response);
                 if (response.data != null) {
-                    console.log("ПОЛУЧИЛ НЕ ПУСТОТУ")
 
-                    console.log(response.data.availableMenu)
-                    // this.props.onAdminArrayUpdate(response.data.availableMenu)
-                    // console.log(this.props.newMenuAdmin)
+                    //console.log(response.data.availableMenu)
+                    this.props.onAdminArrayUpdate(response.data.availableMenu)
+                    // //console.log(this.props.newMenuAdmin)
                     this.props.onListDownload(response.data.availableMenu)
-                    console.log(this.props.availableMenu)
+
+                    console.log("ПОЛУЧИЛ НЕ ПУСТОТУ")
+                    console.log(response.data.availableMenu)
+
+                    this.setState({
+                        cardsArray: response.data.availableMenu
+                    })
                 } else {
-                    console.log("ПОЛУЧИЛ  ПУСТОТУ")
+                    //console.log("ПОЛУЧИЛ  ПУСТОТУ")
 
                 }
 
             })
             .catch(function (error) {
-                // console.log(error);
+                // //console.log(error);
             });
+
     }
 
     componentWillMount() {
@@ -88,7 +96,7 @@ class admin extends Component {
 
     handleChange = name => event => {
         this.setState({[name]: event.target.checked});
-        // console.log(name, event.target.checked)
+        // //console.log(name, event.target.checked)
         //TODO stash to database
 
         this.setState({
@@ -96,46 +104,65 @@ class admin extends Component {
         })
 
         // setTimeout(this.props.history.push("/admin/2"), 1000)
-        // console.log("ADMIN IS DISABLED" + this.state.selectionDisabled)
+        // //console.log("ADMIN IS DISABLED" + this.state.selectionDisabled)
     };
 
 
+    makeEmptyAdminArray() {
+        const adminArray = []
+        console.log('ОБНУЛЕНИЯ МАССИВА ДЛЯ ОТПРАВКИ В СИНГ КАРД')
+        for (let cardNum = 0; cardNum <= 3; cardNum++) {
+            adminArray[cardNum] = [
+                {
+                    title: '',
+                    image: ''
+                },
+                {
+                    title: '',
+                    image: ''
+                },
+                {
+                    title: '',
+                    image: ''
+                },
+                {
+                    title: '',
+                    image: ''
+                },
+            ]
+        }
+        this.setState({
+            cardsArray:adminArray
+        })
+    }
+
     render() {
-        // console.log("ADMIN IS DISABLED" + this.state.selectionDisabled)
-        console.log("V RENDERE AVAILABLE MENU")
-        console.log(this.props)
+        // //console.log("ADMIN IS DISABLED" + this.state.selectionDisabled)
+        //console.log("V RENDERE AVAILABLE MENU")
 
         let cardsArray = [];
         const {classes} = this.props;
-        for (let variable = 0; variable <= 3; variable++) {
-            let adminArray = this.props.adminArray
-            // console.log('RENDERING')
-            //TODO GET ADMIN ARRAY FROM  BACKEND Else
-            // console.log(adminArray)
-            if (adminArray.length === 0) {
-                for (let cardNum = 0; cardNum <= 3; cardNum++) {
-                    adminArray[cardNum] = [
-                        {
-                            title: '',
-                            image: ''
-                        },
-                        {
-                            title: '',
-                            image: ''
-                        },
-                        {
-                            title: '',
-                            image: ''
-                        },
-                        {
-                            title: '',
-                            image: ''
-                        },
-                    ]
-                }
+        let adminArray = this.state.cardsArray
+        console.log("this.state.cardsArray")
+        console.log(this.state.cardsArray)
+        if (adminArray.length === 0) {
+            this.makeEmptyAdminArray()
+        }
 
-                // console.log(adminArray)
-            }
+
+        for (let variable = 0; variable <= 3; variable++) {
+
+            //console.log('RENDERING')
+            //TODO GET ADMIN ARRAY FROM  BACKEND Else
+            //console.log(adminArray)
+            //console.log(adminArray[variable])
+            console.log("adminArray.length")
+            console.log(adminArray.length)
+
+
+            //console.log("PERED PUSH")
+            //console.log(adminArray)
+            //console.log(adminArray[variable])
             cardsArray.push(
                 <Grid item xs={12} sm={6} key={variable}>
                     <Paper className={classes.paper}>

@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField';
 
 import Button from '@material-ui/core/Button';
 import {connect} from "react-redux";
+import axios from "axios/index";
 
 const styles = theme => ({
     container: {
@@ -27,14 +28,14 @@ class SignInForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
+            email: '',
             password: '',
         }
     }
 
-    handleChange = name => event => {
+    handleChange = email => event => {
         this.setState({
-            name: event.target.value,
+            email: event.target.value,
 
         });
         console.log(this.state.name)
@@ -50,20 +51,47 @@ class SignInForm extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault()
-        if (this.state.name > 0) {
-            console.log('well done U have Logged-In')
+        if (this.state.email > 0 && this.state.password > 0) {
+            console.log(this.state.email);
+            axios.get('http://localhost:5000/api/user/' + this.state.email)
+                .then((response) => {
+                    if (response.data) {
+                        console.log(response)
+                        if (response.data.password == this.state.password) {
+                            alert("Стой проходи")
+                            localStorage.setItem('userEmail', this.state.email);
+                            localStorage.setItem('id', response.data._id);
+
+                            this.props.history.push("/")
+                        } else {
+                            console.log(response)
+
+                            alert("ты ошибся")
+                        }
+
+                    } else {
+                        console.log(response)
+
+                        alert("НЕТ пользователя с таким имейлом")
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+
             // this.props.onLogInUpdate(true);
             // console.log(this.props.isLoggedIn)
             //TODO: LATER  UPDATE TO GET DATA FROM SERVERS and save to store this.props.onUserIdUpdate(idValue);
-            if (localStorage.hasOwnProperty('userId') ) {
-                let userId = localStorage.getItem('userId')
-                console.log("localstoage have data ID: " + userId)
-            } else {
-                alert('NOT REGISTERED (NO DATA IN LOCAL STORAGE')
-                this.props.history.push("/registration")
-
-            }
-            setTimeout(this.props.history.push("/"), 1000)
+            // if (localStorage.hasOwnProperty('userId') ) {
+            //     let userId = localStorage.getItem('userId')
+            //     console.log("localstoage have data ID: " + userId)
+            // } else {
+            //     alert('NOT REGISTERED (NO DATA IN LOCAL STORAGE')
+            //     this.props.history.push("/registration")
+            //
+            // }
+            // setTimeout(this.props.history.push("/"), 1000)
         } else {
             alert('CHECK FORM FIELDS')
         }

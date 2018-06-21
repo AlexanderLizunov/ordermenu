@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import SignInForm from '../Components/SignInForm'
+import SignInForm from '../Components/Registration/SignInForm'
 
 
 class registration extends Component {

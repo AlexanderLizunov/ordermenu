@@ -36,16 +36,38 @@ class AdminSecond extends Component {
     }
 
     getList() {
-        axios.get('../usersBalance.json')
+
+        axios.get('http://localhost:5000/api/users')
             .then((response) => {
-                this.setState({
-                    userList: response.data
-                })
-                this.userDisplay(this.state.page)
+                console.log(response);
+                if (response.data != null) {
+
+                    console.log("ПОЛУЧИЛ НЕ ПУСТОТУ")
+                    console.log("ПОЛУЧИЛ НЕ ПУСТОТУ")
+
+                    this.setState({
+                        userList: response.data
+                    })
+                    this.userDisplay(this.state.page)
+                } else {
+                    //console.log("ПОЛУЧИЛ  ПУСТОТУ")
+
+                }
+
             })
-            .catch((error) => {
-                console.log(error)
-            })
+            .catch(function (error) {
+                // //console.log(error);
+            });
+        // axios.get('../usersBalance.json')
+        //     .then((response) => {
+        //         this.setState({
+        //             userList: response.data
+        //         })
+        //         this.userDisplay(this.state.page)
+        //     })
+        //     .catch((error) => {
+        //         console.log(error)
+        //     })
     }
 
     userDisplay(pageNum) {

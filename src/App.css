@@ -84,7 +84,28 @@
     justify-content: space-between;
 }
 
-.admin-second{
+.admin-card-cover {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.admin-card-cover > div {
+    max-width: 100%;
+    width: 100%;
+}
+
+.admin-card-item {
+    display: flex;
+}
+
+.admin-card-image-cover > img {
+    height: 40px;
+
+}
+
+
+.admin-second {
     justify-content: space-around;
     max-width: 1200px;
     width: 80%;
@@ -113,7 +134,7 @@
 .user-balance-block {
     width: 40%;
     border: 3px solid black;
-    padding: 20px   ;
+    padding: 20px;
 }
 
 .balance-form-item {
@@ -131,11 +152,11 @@
     width: 60% !important;
 }
 
-.balance-form-input  input{
-    text-align: right!important;
+.balance-form-input input {
+    text-align: right !important;
 }
 
-.balance-block-header{
+.balance-block-header {
     font-size: 20px;
     text-align: center;
     display: flex;
@@ -145,17 +166,18 @@
     width: 50%;
 
 }
-.balance-block-title span{
+
+.balance-block-title span {
     text-align: right;
 }
 
-.balance-block-footer{
+.balance-block-footer {
     background-color: lightgray;
     height: 60px;
     text-align: right;
 }
 
-.balance-buttons{
+.balance-buttons {
     border: none;
     background: transparent;
     margin: 10px;
@@ -163,17 +185,17 @@
     cursor: pointer;
 }
 
-table{
-    min-width: auto!important;
+table {
+    min-width: auto !important;
 }
 
-.form-order-block{
+.form-order-block {
     display: flex;
     vertical-align: center;
     margin-top: 80px;
 }
 
-.form-order-block button{
+.form-order-block button {
     border: 2px solid black;
     height: 60px;
 }

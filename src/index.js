@@ -11,28 +11,9 @@ import login from './Routes/login'
 import registration from './Routes/registration'
 import adminFirst from './Routes/admin'
 import Stats from './Routes/stats'
+import verify from './Routes/verify'
 import reducer from './reducers'
 
-// const initialState = {
-//     orderDishes: '',
-//     userProfile: {
-//         userBalance: '',
-//         userEmail: '',
-//         userId: '',
-//     },
-//     adminArray: [],
-//     BACKEND_ORDER_DATE_ORDER_STORE: [],
-//     currentDate: ''
-// }
-
-
-
-// function order(state = initialState, action) {
-//
-//
-//     console.log(action)
-//     return state
-// }
 
 const store = createStore(
     reducer,
@@ -52,6 +33,7 @@ ReactDOM.render(
                 <Route path='/registration' component={registration}/>
                 <Route path='/admin' component={adminFirst}/>
                 <Route path='/stats' component={Stats}/>
+                <Route path='/verify' component={verify}/>
                 <Route path='/' component={App}/>
 
             </Switch>
