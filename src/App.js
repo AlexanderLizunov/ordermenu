@@ -17,7 +17,8 @@ class App extends Component {
         this.state = {
             food: [],
             order: [],
-            date: date
+            date: date,
+            ordering: ""
         }
     }
 
@@ -31,6 +32,7 @@ class App extends Component {
             this.props.onUserBalanceUpdate("50$")
             this.props.onUserEmailUpdate(localStorage.getItem('userEmail'))
             this.getText()
+
         } else {
 
             this.props.history.push("/registration")
@@ -44,7 +46,7 @@ class App extends Component {
 
         console.log(this.props.currentDate)
         axios.get('http://localhost:5000/api/availableMenu/' + this.props.currentDate)
-            .then( (response)=> {
+            .then((response) => {
                 console.log(response);
                 if (response.data != null) {
                     console.log("ПОЛУЧИЛ НЕ ПУСТОТУ")
@@ -52,10 +54,14 @@ class App extends Component {
                     console.log(response.data.availableMenu)
                     // this.props.onAdminArrayUpdate(response.data.availableMenu)
                     // console.log(this.props.newMenuAdmin)
-                    console.log(this.state    )
+                    console.log(this.state)
 
                     this.props.onListDownload(response.data.availableMenu)
                     console.log(this.props.availableMenu)
+
+                    this.setState({
+                        ordering: response.data.ordering
+                    })
                 } else {
                     console.log("ПОЛУЧИЛ  ПУСТОТУ")
 
@@ -71,10 +77,17 @@ class App extends Component {
         console.log("APP RENDER")
         console.log(this.props.availableMenu)
         console.log(this.props)
+        let messageMakeOrder = ''
+        if (this.state.ordering === "false") {
+
+            messageMakeOrder = 'ВОЗМОЖНОСТЬ ЗАКАЗЫВАТЬ ЗАБЛОКИРОВАНА ОБРАТИТЕСЬ К АДМИНИСТРАТОРУ'
+        }
+
         return (
             <div className="App">
                 <Navigation/>
-                <Menu value={this.props.availableMenu}/>
+                <div>{messageMakeOrder}</div>
+                <Menu value={this.props.availableMenu} ordering={this.state.ordering}/>
             </div>
         );
     }

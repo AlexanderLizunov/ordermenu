@@ -20,8 +20,11 @@ class Menu extends Component {
         let listItems = [];
         // console.log(this.props.value)
         if (foodArray.length > 0) {
-            listItems = foodArray.map((shop, index) =>
-                <SingleCard key={index} number={index} dishes={shop}/>
+            // console.log("foodArray");
+            // console.log(foodArray);
+            // if(foodArray. a )
+            listItems = foodArray.map((cardDishes, index) =>
+                <SingleCard ordering={this.props.ordering} key={index} number={index} dishes={cardDishes}/>
             )
         }
         return (

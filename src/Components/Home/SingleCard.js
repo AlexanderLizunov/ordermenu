@@ -21,61 +21,67 @@ class SingleCard extends Component {
     }
 
     handleOrder(event) {
-        let target = event.target
-        while (target !== this) {
-            if (target.getAttribute("data-list-item") === 'supplier-list') {
-                console.log(target.getAttribute('data-orderid'));
-                // let orderArray = this.props.orderDishes
-                // orderArray[target.getAttribute('data-orderid')] = !orderArray[target.getAttribute('data-orderid')]
-                // console.log(orderArray)
-                // orderArray[target.getAttribute('data-orderid')] = true
+        if (this.props.ordering === "false") {
+
+            alert("ЗАКАЗ НЕ МОЖЕТ БЫТЬ ПРИНЯТ, ОБРАТИТЕСЬ К  АДМИНИСТРАТОРУ")
+        } else {
+            let target = event.target
+            while (target !== this) {
+                if (target.getAttribute("data-list-item") === 'supplier-list') {
+                    console.log(target.getAttribute('data-orderid'));
+                    // let orderArray = this.props.orderDishes
+                    // orderArray[target.getAttribute('data-orderid')] = !orderArray[target.getAttribute('data-orderid')]
+                    // console.log(orderArray)
+                    // orderArray[target.getAttribute('data-orderid')] = true
 
 
-                this.props.onOrderUpdate(target.getAttribute('data-orderid'))
-                this.setState({
-                    orderId: target.getAttribute("data-orderid")
-                })
-                // console.log(this.state)
-                // console.log(this.props.dishes)
-                this.props.onStoreOrder(this.props.dishes)
-                //SENDING TO BACKEND
-                let userEmail = localStorage.getItem('userEmail')
-                let orderArray = this.props.dishes
-                    orderArray.forEach((element)=>{
+                    this.props.onOrderUpdate(target.getAttribute('data-orderid'))
+                    this.setState({
+                        orderId: target.getAttribute("data-orderid")
+                    })
+                    // console.log(this.state)
+                    // console.log(this.props.dishes)
+                    this.props.onStoreOrder(this.props.dishes)
+                    //SENDING TO BACKEND
+                    let userEmail = localStorage.getItem('userEmail')
+                    let orderArray = this.props.dishes
+                    orderArray.forEach((element) => {
                         console.log(element)
 
-                            delete element._id
+                        delete element._id
                         console.log(element)
                     })
 
-                const sendToBackEndData = {
-                    date: this.state.currentDate,
-                    email: userEmail,
-                    orderNumber: target.getAttribute('data-orderid'),
-                    order: orderArray
+                    const sendToBackEndData = {
+                        date: this.state.currentDate,
+                        email: userEmail,
+                        orderNumber: target.getAttribute('data-orderid'),
+                        order: orderArray
 
+                    }
+
+                    console.log("sendToBackEndData")
+                    console.log(sendToBackEndData)
+                    axios.put('http://localhost:5000/api/orderStore/' + userEmail, sendToBackEndData)
+                        .then(function (response) {
+                            console.log(response);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+
+
+                    return;
                 }
-
-                console.log("sendToBackEndData")
-                console.log(sendToBackEndData)
-                axios.put('http://localhost:5000/api/orderStore/'+userEmail, sendToBackEndData)
-                    .then(function (response) {
-                        console.log(response);
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-
-
-                return;
+                target = target.parentNode;
             }
-            target = target.parentNode;
         }
+
 
     }
 
     render() {
-
+        console.log(this.props.ordering);
         // console.log(this.props.orderedMenu)
         // console.log(this.props.number)
         let activeCardClassName

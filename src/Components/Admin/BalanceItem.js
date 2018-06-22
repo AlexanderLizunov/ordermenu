@@ -46,8 +46,8 @@ class BalanceItem extends React.Component {
         console.log(this.props.userNumber)
             // preparing for push
         // /api/users/:id put
-
-        axios.put('http://localhost:5000/api/users/:id' +this.props.userNumber._id,userQuery )
+        console.log(userQuery)
+        axios.put('http://localhost:5000/api/users/' +userQuery._id,userQuery )
             .then(function (response) {
                 console.log(response);
             })

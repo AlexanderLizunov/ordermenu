@@ -35,28 +35,40 @@ const styles = theme => ({
 class SimpleModal extends React.Component {
     constructor(props){
         super(props)
+        const today = new Date(),
+            date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
         this.state={
             open: false,
-            modalProps: ''
+            modalProps: '',
+            date: date
         }
     }
 
 
     handleOpen = () => {
         this.setState({ open: true });
-        axios.get('../ordersStore.json')
-            .then((response) => {
-                // this.props.onListDownload(response.data)
 
-                // this.orderBlanker(response.data)
+        axios.get('http://localhost:5000/api/orders/' +this.state.date)
+            .then( (response)=> {
+                console.log(response);
                 this.setState({
                     modalProps: response.data
                 })
-                console.log(response.data)
             })
-            .catch((error) => {
-                console.log(error)
+            .catch(function (error) {
+                console.log(error);
+            });
+        axios.put('http://localhost:5000/api/availableMenu/status/' +this.state.date, {ordering: false})
+            .then( (response)=> {
+                console.log(response);
+                this.setState({
+                    modalProps: response.data
+                })
             })
+            .catch(function (error) {
+                console.log(error);
+            });
+
     };
 
     handleClose = () => {
