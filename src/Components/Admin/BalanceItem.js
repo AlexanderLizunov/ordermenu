@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 
 // import Button from '@material-ui/core/Button';
 import {connect} from "react-redux";
+import axios from "axios/index";
 
 const styles = theme => ({
     container: {
@@ -43,6 +44,17 @@ class BalanceItem extends React.Component {
 
         console.log(this.state.user)
         console.log(this.props.userNumber)
+            // preparing for push
+        // /api/users/:id put
+
+        axios.put('http://localhost:5000/api/users/:id' +this.props.userNumber._id,userQuery )
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
 
     };
 

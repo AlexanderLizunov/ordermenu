@@ -41,7 +41,7 @@ class admin extends Component {
         }
     }
 
-    getList() {
+    getOptionsList() {
         axios.get('../dishes.json')
 
             .then((response) => {
@@ -71,13 +71,15 @@ class admin extends Component {
 
                     console.log("ПОЛУЧИЛ НЕ ПУСТОТУ")
                     console.log(response.data.availableMenu)
-
+                    console.log(this.state.cardsArray);
                     this.setState({
                         cardsArray: response.data.availableMenu
                     })
                 } else {
-                    //console.log("ПОЛУЧИЛ  ПУСТОТУ")
+                    console.log("ПОЛУЧИЛ  ПУСТОТУ")
+                    console.log("Заполняю пустое доступное меню")
 
+                    this.makeEmptyAdminArray()
                 }
 
             })
@@ -90,7 +92,7 @@ class admin extends Component {
     componentWillMount() {
         //TODO: LATTER MAKE REQUEST TO SERVER TO GET BALANCE AND EMAIL
 
-        this.getList()
+        this.getOptionsList()
         this.getCurrentMenuList()
     }
 
@@ -134,6 +136,8 @@ class admin extends Component {
         this.setState({
             cardsArray:adminArray
         })
+        this.props.onAdminArrayUpdate(adminArray)
+
     }
 
     render() {
@@ -143,6 +147,7 @@ class admin extends Component {
         let cardsArray = [];
         const {classes} = this.props;
         let adminArray = this.state.cardsArray
+
         console.log("this.state.cardsArray")
         console.log(this.state.cardsArray)
         if (adminArray.length === 0) {
