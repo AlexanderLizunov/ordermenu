@@ -69,26 +69,26 @@ class SingleCard extends React.Component {
         let tempCardData = this.state.cardData
         tempCardData[index] = object
 
-        console.log("HANDLE CHANGE CARD DATA UPDATE")
+        //console.log("HANDLE CHANGE CARD DATA UPDATE")
         this.setState({
             cardData: tempCardData
         });
-        //console.log(this.state.cardData)
+        ////console.log(this.state.cardData)
     }
 
     componentWillMount() {
-        console.log("SingleCard MOUNT")
-        console.log("STATE")
-        console.log(this.state)
-        console.log("PROPS")
-        console.log(this.props)
+        //console.log("SingleCard MOUNT")
+        //console.log("STATE")
+        //console.log(this.state)
+        //console.log("PROPS")
+        //console.log(this.props)
 
 
-        // //console.log(this.props.newMenuAdmin)
+        // ////console.log(this.props.newMenuAdmin)
         //
         const currentCardNumber = this.props.card,
             updatingStateQuery = this.props.newMenuAdmin
-        // //console.log(
+        // ////console.log(
         //     updatingStateQuery[currentCardNumber]
         // )
         // this.setState({
@@ -102,7 +102,7 @@ class SingleCard extends React.Component {
         //     })
         //     .catch(function (error) {
         //         let backupEmpty = this.state.cardData
-        //         //console.log('')
+        //         ////console.log('')
         //         this.setState({
         //             dish: backupEmpty
         //         })
@@ -116,11 +116,11 @@ class SingleCard extends React.Component {
         // this.setState(
         //     {[event.target.name]: event.target.value}
         // );
-        // //console.log(event.getAttribute('data-orderid'));
+        // ////console.log(event.getAttribute('data-orderid'));
         let b = this.props.cardState
 
-        console.log(this.props.cardState)
-        console.log(event.target.name)
+        //console.log(this.props.cardState)
+        //console.log(event.target.name)
         b[event.target.name].title = event.target.value
         b[event.target.name] = this.findDish(event.target.value)
         this.setState({
@@ -128,37 +128,37 @@ class SingleCard extends React.Component {
         });
         //
         //
-        // // console.log(b)
-        // // console.log(b)
-        // console.log(b)
-        // // //console.log(event.target.value)
-        // // //console.log(this.state.card)
-        // // //console.log(this.state.card)
+        // // //console.log(b)
+        // // //console.log(b)
+        // //console.log(b)
+        // // ////console.log(event.target.value)
+        // // ////console.log(this.state.card)
+        // // ////console.log(this.state.card)
         //
-        // console.log("HANDLE CHANGE")
+        // //console.log("HANDLE CHANGE")
         // //
         let adminArray = this.props.adminArray
-        console.log("adminArray")
-        console.log(adminArray)
+        //console.log("adminArray")
+        //console.log(adminArray)
         //
         adminArray[this.props.card] = b
-        console.log(adminArray)
+        //console.log(adminArray)
         // //
         this.updateCardData(this.findDish(event.target.value), event.target.name)
-        // // // //console.log(this.state.cardData)
-        // // // //console.log(this.props.card)
+        // // // ////console.log(this.state.cardData)
+        // // // ////console.log(this.props.card)
         this.props.onAdminArrayUpdate(adminArray)
-        // // //console.log(this.props)
+        // // ////console.log(this.props)
         // //
         // PREPARING  FOR SENDING TO BACKEND
         let arrayForSendingMenus = this.props.newMenuAdmin
         arrayForSendingMenus.forEach((element) => {
-            console.log(element)
+            //console.log(element)
             if (element.hasOwnProperty("_id")) {
                 delete element._id
 
             }
-            //console.log(element)
+            ////console.log(element)
         })
 
         let sendBackendAvailableMenu = {
@@ -166,16 +166,16 @@ class SingleCard extends React.Component {
             availableMenu: arrayForSendingMenus
         }
 
-        // console.log("sendBackendAvailableMenu")
-        // console.log(sendBackendAvailableMenu)
+        // //console.log("sendBackendAvailableMenu")
+        // //console.log(sendBackendAvailableMenu)
         //
-        // // //console.log(sendBackendAvailableMenu)
+        // // ////console.log(sendBackendAvailableMenu)
         axios.put('http://localhost:5000/api/availableMenu/' + this.props.currentDate, sendBackendAvailableMenu)
             .then(function (response) {
-                //console.log(response);
+                ////console.log(response);
             })
             .catch(function (error) {
-                //console.log(error);
+                ////console.log(error);
             });
 
     };
@@ -187,18 +187,18 @@ class SingleCard extends React.Component {
                 return dishObject = dish
             }
         });
-        // //console.log("DISH OBJECT= ")
-        // //console.log(dishObject)
+        // ////console.log("DISH OBJECT= ")
+        // ////console.log(dishObject)
         return dishObject
     }
 
 
     render() {
-        // console.log("IS DISABLED" + this.props)
-        // console.log(this.props)
-        // console.log(this.state)
-        console.log(" RENDER CARDSTATE DISH")
-        console.log(this.props.ca)
+        // //console.log("IS DISABLED" + this.props)
+        // //console.log(this.props)
+        // //console.log(this.state)
+        //console.log(" RENDER CARDSTATE DISH")
+        //console.log(this.props.ca)
         const {classes} = this.props;
         let optionsArray = []
 
@@ -217,8 +217,8 @@ class SingleCard extends React.Component {
             this.state.dish.forEach((dish, variable) => {
                 let b = this.state.dish[variable]
 
-                console.log(" RENDER CARDSTATE DISH")
-                console.log(this.state.dish)
+                //console.log(" RENDER CARDSTATE DISH")
+                //console.log(this.state.dish)
                 selectArray.push(
                     <div className="admin-card-item">
                         <div className="admin-card-image-cover">
@@ -252,9 +252,9 @@ class SingleCard extends React.Component {
         } else if (this.props.cardState != undefined) {
             this.props.cardState.forEach((dish, variable) => {
                 let b = this.props.cardState[variable]
-                console.log(this.props.cardState[variable])
-                //console.log(" RENDER CARDSTATE DISH")
-                //console.log(this.state.dish)
+                //console.log(this.props.cardState[variable])
+                ////console.log(" RENDER CARDSTATE DISH")
+                ////console.log(this.state.dish)
                 selectArray.push(
                     <div className="admin-card-item">
                         <div className="admin-card-image-cover">
@@ -316,73 +316,3 @@ export default connect(
 
     })
 )(withRouter(withStyles(styles)(SingleCard)));
-// if (this.state.dish.length > 1) {
-//
-//     this.state.dish.forEach((dish, variable) => {
-//         let b = this.state.dish[variable]
-//
-//         //console.log(" RENDER CARDSTATE DISH")
-//         //console.log(this.state.dish)
-//         selectArray.push(
-//             <div className="admin-card-item">
-//                 <div className="admin-card-image-cover">
-//                     <Avatar
-//                         alt="Пусто"
-//                         src={b.image}
-//                         className={classNames(classes.avatar, classes.bigAvatar)}
-//                     />
-//                 </div>
-//
-//                 <Select
-//                     key={variable}
-//                     open={this.state.open}
-//                     onClose={this.handleClose}
-//                     onOpen={this.handleOpen}
-//                     value={b.title}
-//                     onChange={this.handleChange}
-//                     inputProps={{
-//                         name: variable,
-//                         id: 'demo-controlled-open-select',
-//                     }}
-//                 >
-//                     {optionsArray}
-//                 </Select>
-//             </div>
-//         )
-//     })
-// } else if (this.props.cardState != undefined) {
-//     this.props.cardState.forEach((dish, variable) => {
-//         let b = this.props.cardState[variable]
-//
-//         //console.log(" RENDER CARDSTATE DISH")
-//         //console.log(this.state.dish)
-//         selectArray.push(
-//             <div className="admin-card-item">
-//
-//                 <div className="admin-card-image-cover">
-//                     <Avatar
-//                         alt="Пусто"
-//                         src={b.image}
-//                         className={classNames(classes.avatar, classes.bigAvatar)}
-//                     />
-//                 </div>
-//
-//                 <Select
-//                     key={variable}
-//                     open={this.state.open}
-//                     onClose={this.handleClose}
-//                     onOpen={this.handleOpen}
-//                     value={b.title}
-//                     onChange={this.handleChange}
-//                     inputProps={{
-//                         name: variable,
-//                         id: 'demo-controlled-open-select',
-//                     }}
-//                     className="admin-card-select-cover"
-//                 >
-//                     {optionsArray}
-//                 </Select>
-//             </div>
-//         )
-//     })
-// }

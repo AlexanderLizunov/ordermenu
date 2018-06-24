@@ -61,9 +61,9 @@ class SimpleModal extends React.Component {
         axios.put('http://localhost:5000/api/availableMenu/status/' +this.state.date, {ordering: false})
             .then( (response)=> {
                 console.log(response);
-                this.setState({
-                    modalProps: response.data
-                })
+                // this.setState({
+                //     modalProps: response.data
+                // })
             })
             .catch(function (error) {
                 console.log(error);

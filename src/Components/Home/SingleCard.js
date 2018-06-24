@@ -35,12 +35,12 @@ class SingleCard extends Component {
                     // orderArray[target.getAttribute('data-orderid')] = true
 
 
-                    this.props.onOrderUpdate(target.getAttribute('data-orderid'))
                     this.setState({
                         orderId: target.getAttribute("data-orderid")
                     })
                     // console.log(this.state)
                     // console.log(this.props.dishes)
+                    this.props.onOrderUpdate(target.getAttribute('data-orderid'))
                     this.props.onStoreOrder(this.props.dishes)
                     //SENDING TO BACKEND
                     let userEmail = localStorage.getItem('userEmail')
@@ -81,6 +81,9 @@ class SingleCard extends Component {
     }
 
     render() {
+        // if (this.props.ordered === String(this.props.number)) {
+        //     activeCardClassName = 'shop-card list-items__active'
+        // } else {
         console.log(this.props.ordering);
         // console.log(this.props.orderedMenu)
         // console.log(this.props.number)

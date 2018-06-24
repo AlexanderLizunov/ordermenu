@@ -23,28 +23,20 @@ class App extends Component {
     }
 
     componentWillMount() {
-        // console.log(this.state.linkId)
-        // localStorage.setItem(key, value);
         if (localStorage.hasOwnProperty('id')) {
             let userId = localStorage.getItem('userId')
             console.log("localstoage have data ID: " + userId)
             //TODO: LATTER MAKE REQUEST TO SERVER TO GET BALANCE AND EMAIL
-            this.props.onUserBalanceUpdate("50$")
+            // this.props.onUserBalanceUpdate("50$")
             this.props.onUserEmailUpdate(localStorage.getItem('userEmail'))
             this.getText()
-
         } else {
-
             this.props.history.push("/registration")
-
         }
         this.props.onDateSet(this.state.date)
-
     }
 
     getText() {
-
-        console.log(this.props.currentDate)
         axios.get('http://localhost:5000/api/availableMenu/' + this.props.currentDate)
             .then((response) => {
                 console.log(response);
@@ -52,8 +44,6 @@ class App extends Component {
                     console.log("ПОЛУЧИЛ НЕ ПУСТОТУ")
 
                     console.log(response.data.availableMenu)
-                    // this.props.onAdminArrayUpdate(response.data.availableMenu)
-                    // console.log(this.props.newMenuAdmin)
                     console.log(this.state)
 
                     this.props.onListDownload(response.data.availableMenu)

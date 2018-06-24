@@ -58,12 +58,6 @@ class BalanceItem extends React.Component {
 
     };
 
-
-    handleSubmit(e) {
-        e.preventDefault()
-        console.log('submiting?')
-    }
-
     render() {
         const {classes} = this.props;
 

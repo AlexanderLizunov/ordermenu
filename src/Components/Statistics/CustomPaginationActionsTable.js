@@ -180,7 +180,7 @@ class CustomPaginationActionsTable extends React.Component {
             })
             // console.log(summary)
             finalElement.date = item.date
-            finalElement.orderNumber = item.orderNumber
+            finalElement.orderNumber = 1+ Number(item.orderNumber)
             finalElement.orderTitle = `${summary}`
             return finalElement
         })
@@ -195,7 +195,7 @@ class CustomPaginationActionsTable extends React.Component {
 
     render() {
         const {classes} = this.props;
-        const {data, rowsPerPage, page} = this.state;
+        const { rowsPerPage, page} = this.state;
         let emptyRows =0
         // console.log(this.props.statistics)
         // console.log(this.state.displayList)

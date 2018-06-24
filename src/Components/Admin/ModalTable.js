@@ -45,11 +45,11 @@ class SimpleTable extends Component {
     render() {
         const {props, classes} = this.props;
 
-        console.log("DATA")
-        console.log(data)
-        console.log(this.state.resultData)
-
-        console.log(this.props.modalProps)
+        // console.log("DATA")
+        // console.log(data)
+        // console.log(this.state.resultData)
+        //
+        // console.log(this.props.modalProps)
         // var
         var inComeData = this.props.modalProps
         let emptyArray = this.state.resultData
@@ -69,7 +69,7 @@ class SimpleTable extends Component {
 
 
         if (data.length > 3) {
-            console.log(data)
+            // console.log(data)
             dataArray = data.map((n, index) => (
                 <TableRow key={index}>
                     <TableCell component="th" scope="row">

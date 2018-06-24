@@ -38,7 +38,6 @@ ReactDOM.render(
 
             </Switch>
         </BrowserRouter>
-        {/*<App/>*/}
     </Provider>,
     document.getElementById('root')
 )

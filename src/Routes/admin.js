@@ -70,10 +70,12 @@ class admin extends Component {
                     this.props.onListDownload(response.data.availableMenu)
 
                     console.log("ПОЛУЧИЛ НЕ ПУСТОТУ")
-                    console.log(response.data.availableMenu)
-                    console.log(this.state.cardsArray);
+                    console.log(response.data)
                     this.setState({
-                        cardsArray: response.data.availableMenu
+                        cardsArray:  response.data.availableMenu,
+                        checkedB: !JSON.parse(response.data.ordering),
+                        selectionDisabled: JSON.parse(response.data.ordering)
+
                     })
                 } else {
                     console.log("ПОЛУЧИЛ  ПУСТОТУ")
@@ -97,16 +99,29 @@ class admin extends Component {
     }
 
     handleChange = name => event => {
-        this.setState({[name]: event.target.checked});
+        console.log("CLICK");
+        console.log(name)
+        // console.log(event.target.checked)
+        console.log(this.state)
+        // this.setState({[name]: event.target.checked});
         // //console.log(name, event.target.checked)
         //TODO stash to database
 
         this.setState({
-            selectionDisabled: !this.state.selectionDisabled
+            checkedB: event.target.checked,
+            selectionDisabled: !event.target.checked
         })
+        axios.put('http://localhost:5000/api/availableMenu/status/' + this.props.currentDate, {ordering: !event.target.checked})
+            .then((response) => {
+                console.log(response);
+                // this.setState({
+                //     modalProps: response.data
+                // })
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
 
-        // setTimeout(this.props.history.push("/admin/2"), 1000)
-        // //console.log("ADMIN IS DISABLED" + this.state.selectionDisabled)
     };
 
 
@@ -134,7 +149,7 @@ class admin extends Component {
             ]
         }
         this.setState({
-            cardsArray:adminArray
+            cardsArray: adminArray
         })
         this.props.onAdminArrayUpdate(adminArray)
 
@@ -147,9 +162,10 @@ class admin extends Component {
         let cardsArray = [];
         const {classes} = this.props;
         let adminArray = this.state.cardsArray
+        console.log(this.state)
 
-        console.log("this.state.cardsArray")
-        console.log(this.state.cardsArray)
+        // console.log("this.state.cardsArray")
+        // console.log(this.state.cardsArray)
         if (adminArray.length === 0) {
             this.makeEmptyAdminArray()
         }
@@ -161,15 +177,15 @@ class admin extends Component {
             //TODO GET ADMIN ARRAY FROM  BACKEND Else
             //console.log(adminArray)
             //console.log(adminArray[variable])
-            console.log("adminArray.length")
-            console.log(adminArray.length)
+            // console.log("adminArray.length")
+            // console.log(adminArray.length)
 
 
             //console.log("PERED PUSH")
             //console.log(adminArray)
             //console.log(adminArray[variable])
             cardsArray.push(
-                <Grid item xs={12} sm={6} key={variable}>
+                <Grid key={variable} item xs={12} sm={6}>
                     <Paper className={classes.paper}>
                         <SingleCard isDisbled={this.state.selectionDisabled} key={variable} card={variable}
                                     cardState={adminArray[variable]}

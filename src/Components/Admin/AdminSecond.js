@@ -39,11 +39,11 @@ class AdminSecond extends Component {
 
         axios.get('http://localhost:5000/api/users')
             .then((response) => {
-                console.log(response);
+                // console.log(response);
                 if (response.data != null) {
 
-                    console.log("ПОЛУЧИЛ НЕ ПУСТОТУ")
-                    console.log("ПОЛУЧИЛ НЕ ПУСТОТУ")
+                    // console.log("ПОЛУЧИЛ НЕ ПУСТОТУ")
+                    // console.log("ПОЛУЧИЛ НЕ ПУСТОТУ")
 
                     this.setState({
                         userList: response.data
@@ -103,7 +103,7 @@ class AdminSecond extends Component {
 
     prevList() {
         let num = this.state.page - 1
-        console.log(num)
+        // console.log(num)
 
         if (this.state.page === 0) {
             alert("Первая страница")
