@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux'
 import axios from 'axios';
-
-import './App.css'
-
 import Menu from './Components/Home/Menu';
 import Navigation from "./Components/Navigation";
+import './App.css'
 
+import {connect} from 'react-redux'
 
 class App extends Component {
     constructor(props) {
@@ -18,17 +16,39 @@ class App extends Component {
             food: [],
             order: [],
             date: date,
-            ordering: ""
+            ordering: "",
+            emailVerified: '',
+            balance:'',
+            userEmail:''
         }
     }
 
     componentWillMount() {
-        if (localStorage.hasOwnProperty('id')) {
-            let userId = localStorage.getItem('userId')
-            console.log("localstoage have data ID: " + userId)
-            //TODO: LATTER MAKE REQUEST TO SERVER TO GET BALANCE AND EMAIL
-            // this.props.onUserBalanceUpdate("50$")
-            this.props.onUserEmailUpdate(localStorage.getItem('userEmail'))
+        if (localStorage.hasOwnProperty('token')) {
+            let userToken = localStorage.getItem('token')
+            axios.get('http://localhost:5000/api/useremail', {headers: {Authorization: "Bearer " + userToken}})
+                .then((response) => {
+                    this.props.onUserEmailUpdate(response.data.email)
+                    this.props.onUserBalanceUpdate(response.data.balance)
+                    localStorage.setItem("balance",response.data.balance)
+                    localStorage.setItem("email",response.data.email)
+                    console.log(response.data);
+                    if (response.data.emailVerified === "false") {
+                        this.setState({
+                            ordering: "false",
+                            emailVerified: "false",
+                            balance: response.data.balance,
+                            userEmail: response.data.email
+                        })
+                    } else {
+                        this.setState({
+                            emailVerified: "true"
+                        })
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
             this.getText()
         } else {
             this.props.history.push("/registration")
@@ -39,24 +59,14 @@ class App extends Component {
     getText() {
         axios.get('http://localhost:5000/api/availableMenu/' + this.props.currentDate)
             .then((response) => {
-                console.log(response);
                 if (response.data != null) {
-                    console.log("ПОЛУЧИЛ НЕ ПУСТОТУ")
-
-                    console.log(response.data.availableMenu)
-                    console.log(this.state)
-
                     this.props.onListDownload(response.data.availableMenu)
-                    console.log(this.props.availableMenu)
-
                     this.setState({
                         ordering: response.data.ordering
                     })
                 } else {
                     console.log("ПОЛУЧИЛ  ПУСТОТУ")
-
                 }
-
             })
             .catch(function (error) {
                 console.log(error);
@@ -64,19 +74,19 @@ class App extends Component {
     }
 
     render() {
-        console.log("APP RENDER")
-        console.log(this.props.availableMenu)
-        console.log(this.props)
         let messageMakeOrder = ''
-        if (this.state.ordering === "false") {
 
+        if (this.state.emailVerified == "false") {
+            messageMakeOrder = 'Email не подтвержден , пройдите по ссылке в консоле'
+            console.log("http://localhost:3000/verify")
+        } else if (this.state.ordering === "false") {
             messageMakeOrder = 'ВОЗМОЖНОСТЬ ЗАКАЗЫВАТЬ ЗАБЛОКИРОВАНА ОБРАТИТЕСЬ К АДМИНИСТРАТОРУ'
         }
 
         return (
             <div className="App">
-                <Navigation/>
-                <div>{messageMakeOrder}</div>
+                <Navigation balance={this.state.balance} email={this.state.userEmail} />
+                <div className="ordering-message">{messageMakeOrder}</div>
                 <Menu value={this.props.availableMenu} ordering={this.state.ordering}/>
             </div>
         );
@@ -88,7 +98,8 @@ export default connect(
         availableMenu: state.availableMenu,
         isLoggedIn: state.isLoggedIn,
         date: state.date,
-        currentDate: state.currentDate
+        currentDate: state.currentDate,
+        userEmail: state.userEmail
     }),
     dispatch => ({
         onListDownload: (array) => {

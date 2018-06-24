@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {withRouter} from "react-router-dom";
-
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
+
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import Button from '@material-ui/core/Button';
+
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {withRouter} from "react-router-dom";
+import {withStyles} from '@material-ui/core/styles';
+
 
 
 const styles = {
@@ -17,9 +19,12 @@ const styles = {
 };
 
 class Navigation extends Component {
-    state = {
-        value: 0,
-    };
+    constructor(props) {
+        super(props)
+        this.state = ({
+            value: 0,
+        })
+    }
 
     handleChange = (event, value) => {
         this.setState({value});
@@ -31,32 +36,29 @@ class Navigation extends Component {
         this.props.onUserBalanceUpdate('');
         this.props.onUserEmailUpdate('');
         localStorage.clear()
-
-
         setTimeout(this.props.history.push("/registration"), 1000)
     }
 
     render() {
         const {classes} = this.props;
         const {value} = this.state;
-        // console.log(this.props.userEmail, this.props.userBalance)
+        const currentEmail= localStorage.getItem('email')
+        const currentBalance= localStorage.getItem('balance')
         return (
             <BottomNavigation
                 value={value}
                 onChange={this.handleChange}
                 showLabels
-                className={'Navigation-block'+  classes.root}>
+                className={'Navigation-block' + classes.root}>
                 <BottomNavigationAction label={<Link to="/">Home</Link>}/>
                 <BottomNavigationAction label={<Link to="stats">Statistic</Link>}/>
                 <BottomNavigationAction label={<Link to="/admin">Admin</Link>}/>
                 <div className='navigation-text'>
-                    {this.props.userEmail}
-
+                    {currentEmail}
                 </div>
                 <div className='navigation-text'>
-                    {this.props.userBalance}
+                    {"Balance:"+ currentBalance}
                 </div>
-
                 <Button variant="contained" color="primary" onClick={this.handleLogout.bind(this)}
                         className={classes.button}>
                     Logout
@@ -64,7 +66,6 @@ class Navigation extends Component {
             </BottomNavigation>
         );
     }
-
 }
 
 Navigation.propTypes = {

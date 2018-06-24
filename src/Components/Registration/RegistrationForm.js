@@ -1,14 +1,13 @@
 import React from 'react';
-import {withRouter} from "react-router-dom";
-// import uuid from 'uuid';
-
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-
 import Button from '@material-ui/core/Button';
-import {connect} from "react-redux";
 import axios from "axios/index";
+
+import {withRouter} from "react-router-dom";
+import {connect} from "react-redux";
+import {withStyles} from '@material-ui/core/styles';
+
 
 const styles = theme => ({
     container: {
@@ -44,14 +43,15 @@ class RegistrationForm extends React.Component {
         });
         console.log(this.state.email)
     };
+
     handleChangePas = pas => event => {
         this.setState({
             password: event.target.value,
 
         });
         // console.log(this.state.password)
-
     };
+
     handleChangerePas = repas => event => {
         this.setState({
             repassword: event.target.value,
@@ -70,54 +70,28 @@ class RegistrationForm extends React.Component {
                 emailVerified: "false",
                 balance: "0"
             }
-
-
             axios.get('http://localhost:5000/api/user/' + this.state.email)
                 .then((response) => {
                     if (response.data) {
                         alert("Пользователь с таким имейлом существует")
                     } else {
                         axios.post('http://localhost:5000/api/users/', sendToBackendUserInfo)
-                            .then((response)=> {
+                            .then((response) => {
                                 console.log(response);
-                                localStorage.setItem('userEmail', this.state.email);
-                                localStorage.setItem('id', response.data._id);
-
+                                localStorage.setItem('token', response.data);
                                 this.props.history.push("/")
                             })
                             .catch(function (error) {
                                 console.log(error);
                             });
-
                     }
-
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
-
-
-
-
-
-            console.log('welldone')
-            // const idValue = uuid.v1()
-            // this.props.onUserIdUpdate(idValue);
-            //TODO: LATTER WILL BE RECEIVED FROM SERVER
-            // this.props.onUserBalanceUpdate('50$');
-            // this.props.onUserEmailUpdate(this.state.email);
-
-            // console.log('LINK ID FOR EMAIL' + idValue)
-            // localStorage.setItem('userId', idValue);
-
-            // console.log('user emails to localstorage' + this.state.email)
-            // localStorage.setItem('userEmail', this.state.email);
-            // localStorage.setItem('userEmail', this.state.email);
-
         } else {
             alert('CHECK FORM FIELDS')
         }
-
     }
 
     render() {
@@ -133,14 +107,12 @@ class RegistrationForm extends React.Component {
                     onChange={this.handleChange('name')}
                     margin="normal"
                 />
-
                 <TextField
                     id="password-input"
                     label="Password"
                     className={classes.textField}
                     type="password"
                     onChange={this.handleChangePas('pas')}
-
                     autoComplete="current-password"
                     margin="normal"
                 />

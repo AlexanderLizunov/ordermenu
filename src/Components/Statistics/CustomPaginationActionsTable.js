@@ -139,13 +139,9 @@ class CustomPaginationActionsTable extends React.Component {
 
 
     getList() {
-        let userEmail = localStorage.getItem('userEmail')
-        axios.get('http://localhost:5000/api/orderStore/' +userEmail)
+        let userEmail = localStorage.getItem('email')
+        axios.get('http://localhost:5000/api/orderStore/' + userEmail)
             .then((response) => {
-                // this.props.onListDownload(response.data)
-
-                // console.log(response.data)
-
                 this.setState({
                     statsList: response.data
                 })
@@ -167,7 +163,6 @@ class CustomPaginationActionsTable extends React.Component {
 
 
     handleStatsOrderArray = (array) => {
-        // console.log('array')
         let finalArray = []
         finalArray = array.map((item) => {
             let finalElement = {
@@ -180,13 +175,10 @@ class CustomPaginationActionsTable extends React.Component {
             })
             // console.log(summary)
             finalElement.date = item.date
-            finalElement.orderNumber = 1+ Number(item.orderNumber)
+            finalElement.orderNumber = 1 + Number(item.orderNumber)
             finalElement.orderTitle = `${summary}`
             return finalElement
         })
-        // console.log(finalArray)
-        // this.onStatsUpdate(finalArray)
-        // console.log(this)
         this.setState({
             displayList: finalArray
         })
@@ -195,31 +187,22 @@ class CustomPaginationActionsTable extends React.Component {
 
     render() {
         const {classes} = this.props;
-        const { rowsPerPage, page} = this.state;
-        let emptyRows =0
-        // console.log(this.props.statistics)
-        // console.log(this.state.displayList)
+        const {rowsPerPage, page} = this.state;
+        let emptyRows = 0
 
         let displayArray = []
         if (this.state.displayList.length > 0) {
             displayArray = this.state.displayList.map((item) => {
-                // console.log(item.date)
-                // console.log(item.orderNumber)
-                // console.log(item.orderTitle)
-
                 return createData(item.date, item.orderNumber, item.orderTitle)
             })
             emptyRows = rowsPerPage - Math.min(rowsPerPage, this.state.displayList.length - page * rowsPerPage);
         }
-
-        // console.log(displayArray)
 
         return (
             <Paper className={classes.root}>
                 <div className={classes.tableWrapper}>
                     <Table className={classes.table}>
                         <TableBody>
-
                             <TableRow>
                                 <TableCell component="th" scope="row">
                                     ДАТА
@@ -229,7 +212,6 @@ class CustomPaginationActionsTable extends React.Component {
                             </TableRow>
                         </TableBody>
                         <TableBody>
-
                             {displayArray.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(n => {
                                 return (
                                     <TableRow key={n.id}>

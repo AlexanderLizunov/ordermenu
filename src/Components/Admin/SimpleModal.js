@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-// import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import axios from "axios/index";
 import SimpleTable from './ModalTable'
+
+import {withStyles} from '@material-ui/core/styles';
 
 function rand() {
     return Math.round(Math.random() * 20) - 10;
@@ -33,11 +33,11 @@ const styles = theme => ({
 });
 
 class SimpleModal extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         const today = new Date(),
             date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-        this.state={
+        this.state = {
             open: false,
             modalProps: '',
             date: date
@@ -46,11 +46,10 @@ class SimpleModal extends React.Component {
 
 
     handleOpen = () => {
-        this.setState({ open: true });
-
-        axios.get('http://localhost:5000/api/orders/' +this.state.date)
-            .then( (response)=> {
-                console.log(response);
+        this.setState({open: true});
+        axios.get('http://localhost:5000/api/orders/' + this.state.date)
+            .then((response) => {
+                // console.log(response);
                 this.setState({
                     modalProps: response.data
                 })
@@ -58,12 +57,9 @@ class SimpleModal extends React.Component {
             .catch(function (error) {
                 console.log(error);
             });
-        axios.put('http://localhost:5000/api/availableMenu/status/' +this.state.date, {ordering: false})
-            .then( (response)=> {
-                console.log(response);
-                // this.setState({
-                //     modalProps: response.data
-                // })
+        axios.put('http://localhost:5000/api/availableMenu/status/' + this.state.date, {ordering: false})
+            .then((response) => {
+                // console.log(response);
             })
             .catch(function (error) {
                 console.log(error);
@@ -72,11 +68,11 @@ class SimpleModal extends React.Component {
     };
 
     handleClose = () => {
-        this.setState({ open: false });
+        this.setState({open: false});
     };
 
     render() {
-        const { classes } = this.props;
+        const {classes} = this.props;
 
         return (
             <div className="form-order-block">
@@ -101,7 +97,6 @@ SimpleModal.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-// We need an intermediary variable for handling the recursive nesting.
 const SimpleModalWrapped = withStyles(styles)(SimpleModal);
 
 export default SimpleModalWrapped;

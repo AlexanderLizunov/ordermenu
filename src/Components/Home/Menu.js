@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import SingleCard from './SingleCard'
+import axios from "axios/index";
 
 import {Container} from 'semantic-ui-react'
 import {Grid} from 'semantic-ui-react'
-import axios from "axios/index";
 import {connect} from "react-redux";
 
 class Menu extends Component {
@@ -14,38 +14,29 @@ class Menu extends Component {
         }
     }
 
-    getCurrentOrder(){
-        const userEmail= localStorage.getItem("userEmail")
+    getCurrentOrder() {
+        const userEmail = localStorage.getItem("userEmail")
         axios.get('http://localhost:5000/api/orderStore/current/' + userEmail)
-            .then((response)=> {
-                console.log(response);
-                // this.setState({
-                //     ordered: response.data.orderNumber
-                // })
+            .then((response) => {
+                // console.log(response);
                 this.props.onOrderUpdate(response.data.orderNumber)
-
             })
-            .catch( (error)=> {
+            .catch((error) => {
                 console.log(error);
             });
     }
 
-    componentWillMount(){
+    componentWillMount() {
         this.getCurrentOrder()
-}
+    }
 
     render() {
-
         const foodArray = this.props.value;
-        console.log(this.props.value)
         let listItems = [];
-        // console.log(this.props.value)
         if (foodArray.length > 0) {
-            // console.log("foodArray");
-            // console.log(foodArray);
-            // if(foodArray. a )
             listItems = foodArray.map((cardDishes, index) =>
-                <SingleCard ordered={this.state.ordered} ordering={this.props.ordering} key={index} number={index} dishes={cardDishes}/>
+                <SingleCard ordered={this.state.ordered} ordering={this.props.ordering} key={index} number={index}
+                            dishes={cardDishes}/>
             )
         }
         return (
@@ -60,7 +51,6 @@ class Menu extends Component {
     }
 }
 
-// export default Menu;
 export default connect(
     state => ({
         availableMenu: state.availableMenu,

@@ -43,10 +43,8 @@ class admin extends Component {
 
     getOptionsList() {
         axios.get('../dishes.json')
-
             .then((response) => {
                 // this.props.onListDownload(response.data)
-
                 // this.orderBlanker(response.data)
                 this.setState({
                     dishesList: response.data
@@ -98,14 +96,7 @@ class admin extends Component {
         this.getCurrentMenuList()
     }
 
-    handleChange = name => event => {
-        console.log("CLICK");
-        console.log(name)
-        // console.log(event.target.checked)
-        console.log(this.state)
-        // this.setState({[name]: event.target.checked});
-        // //console.log(name, event.target.checked)
-        //TODO stash to database
+    handleSwitchChange = name => event => {
 
         this.setState({
             checkedB: event.target.checked,
@@ -157,7 +148,7 @@ class admin extends Component {
 
     render() {
         // //console.log("ADMIN IS DISABLED" + this.state.selectionDisabled)
-        //console.log("V RENDERE AVAILABLE MENU")
+        console.log("V RENDERE AVAILABLE MENU")
 
         let cardsArray = [];
         const {classes} = this.props;
@@ -185,9 +176,9 @@ class admin extends Component {
             //console.log(adminArray)
             //console.log(adminArray[variable])
             cardsArray.push(
-                <Grid key={variable} item xs={12} sm={6}>
+                <Grid key={"1" +variable} item xs={12} sm={6}>
                     <Paper className={classes.paper}>
-                        <SingleCard isDisbled={this.state.selectionDisabled} key={variable} card={variable}
+                        <SingleCard isDisbled={this.state.selectionDisabled} card={variable}
                                     cardState={adminArray[variable]}
                                     options={this.state.dishesList}/>
                     </Paper>
@@ -206,7 +197,7 @@ class admin extends Component {
                                 control={
                                     <Switch
                                         checked={this.state.checkedB}
-                                        onChange={this.handleChange('checkedB')}
+                                        onChange={this.handleSwitchChange('checkedB')}
                                         value="checkedB"
                                         color="primary"
                                     />

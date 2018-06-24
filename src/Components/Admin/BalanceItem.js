@@ -1,14 +1,11 @@
 import React from 'react';
-import {withRouter} from "react-router-dom";
-// import uuid from 'uuid';
-
+import axios from "axios/index";
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
-// import Button from '@material-ui/core/Button';
+import {withStyles} from '@material-ui/core/styles';
+import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import axios from "axios/index";
 
 const styles = theme => ({
     container: {
@@ -37,38 +34,30 @@ class BalanceItem extends React.Component {
 
     handleChange = balance => event => {
         var userQuery = this.props.user
-        userQuery.balance= event.target.value
+        userQuery.balance = event.target.value
         this.setState({
             user: userQuery,
         });
-
-        console.log(this.state.user)
-        console.log(this.props.userNumber)
-            // preparing for push
-        // /api/users/:id put
-        console.log(userQuery)
-        axios.put('http://localhost:5000/api/users/' +userQuery._id,userQuery )
+        // console.log(userQuery)
+        axios.put('http://localhost:5000/api/users/' + userQuery._id, userQuery)
             .then(function (response) {
                 console.log(response);
             })
             .catch(function (error) {
                 console.log(error);
             });
-
-
     };
 
     render() {
         const {classes} = this.props;
-
         return (
-            <form className={'balance-form-item '+classes.container}  noValidate autoComplete="off">
+            <form className={'balance-form-item ' + classes.container} noValidate autoComplete="off">
                 <span>
                     {this.props.user.email}
                 </span>
                 <TextField
                     id="email"
-                    className={'balance-form-input '+classes.textField}
+                    className={'balance-form-input ' + classes.textField}
                     value={this.props.user.balance}
                     onChange={this.handleChange('balance')}
                     margin="normal"

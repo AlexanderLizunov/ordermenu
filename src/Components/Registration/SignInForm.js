@@ -58,44 +58,24 @@ class SignInForm extends React.Component {
                     if (response.data) {
                         console.log(response)
                         if (response.data.password == this.state.password) {
-                            alert("Стой проходи")
                             localStorage.setItem('userEmail', this.state.email);
                             localStorage.setItem('id', response.data._id);
-
                             this.props.history.push("/")
                         } else {
                             console.log(response)
-
                             alert("ты ошибся")
                         }
-
                     } else {
                         console.log(response)
-
                         alert("НЕТ пользователя с таким имейлом")
                     }
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
-
-
-            // this.props.onLogInUpdate(true);
-            // console.log(this.props.isLoggedIn)
-            //TODO: LATER  UPDATE TO GET DATA FROM SERVERS and save to store this.props.onUserIdUpdate(idValue);
-            // if (localStorage.hasOwnProperty('userId') ) {
-            //     let userId = localStorage.getItem('userId')
-            //     console.log("localstoage have data ID: " + userId)
-            // } else {
-            //     alert('NOT REGISTERED (NO DATA IN LOCAL STORAGE')
-            //     this.props.history.push("/registration")
-            //
-            // }
-            // setTimeout(this.props.history.push("/"), 1000)
         } else {
             alert('CHECK FORM FIELDS')
         }
-
     }
 
     render() {
@@ -111,14 +91,12 @@ class SignInForm extends React.Component {
                     onChange={this.handleChange('name')}
                     margin="normal"
                 />
-
                 <TextField
                     id="password-input"
                     label="Password"
                     className={classes.textField}
                     type="password"
                     onChange={this.handleChangePas('pas')}
-
                     autoComplete="current-password"
                     margin="normal"
                 />
@@ -138,11 +116,11 @@ SignInForm.propTypes = {
 export default connect(
     state => ({
         availableMenu: state.availableMenu,
-        userId: state.userId,
+        userId: state.userId
     }),
     dispatch => ({
         onUserIdUpdate: (array) => {
             dispatch({type: 'USER_ID_UPDATE', payload: array})
-        },
+        }
     })
 )(withRouter(withStyles(styles)(SignInForm)));

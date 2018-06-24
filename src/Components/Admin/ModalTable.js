@@ -29,29 +29,13 @@ class SimpleTable extends Component {
         }
     }
 
-
     createData(name, quantity, id) {
         return {id, name, quantity};
     }
 
-
-    // const data = [
-    //     createData('МЕНЮ 1', resultData[0] ),
-    //     createData('МЕНЮ 2', resultData[1]),
-    //     createData('МЕНЮ 3', resultData[2]),
-    //     createData('МЕНЮ 4', resultData[3]),
-    // ];
-
     render() {
-        const {props, classes} = this.props;
-
-        // console.log("DATA")
-        // console.log(data)
-        // console.log(this.state.resultData)
-        //
-        // console.log(this.props.modalProps)
-        // var
-        var inComeData = this.props.modalProps
+        const {classes} = this.props;
+        let inComeData = this.props.modalProps;
         let emptyArray = this.state.resultData
         if (inComeData.length > 0) {
             inComeData.forEach(function (elem) {
@@ -60,16 +44,12 @@ class SimpleTable extends Component {
             )
         }
         let dataArray
-
         const data = this.state.resultData.map((item, id) => {
-
-            console.log(this.createData("МЕНЮ " + (id + 1), item, id));
+            // console.log(this.createData("МЕНЮ " + (id + 1), item, id));
             return this.createData("МЕНЮ " + (id + 1), emptyArray[id], id)
         })
 
-
         if (data.length > 3) {
-            // console.log(data)
             dataArray = data.map((n, index) => (
                 <TableRow key={index}>
                     <TableCell component="th" scope="row">
@@ -79,7 +59,6 @@ class SimpleTable extends Component {
                 </TableRow>
             ))
         }
-
 
         return (
             <Paper className={classes.root}>
@@ -91,10 +70,7 @@ class SimpleTable extends Component {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-
                         {dataArray}
-
-
                     </TableBody>
                 </Table>
             </Paper>

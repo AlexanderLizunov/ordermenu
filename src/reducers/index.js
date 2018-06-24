@@ -5,7 +5,6 @@ import BACKEND_ORDER_DATE_ORDER_STORE from './BACKEND_ORDER_DATE_ORDER_STORE'
 import currentDate from './currentDate'
 import newMenuAdmin from './newMenuAdmin'
 import orderedMenu from './orderedMenu'
-import userProfile from './userProfile'
 
 
 export default combineReducers({
@@ -14,5 +13,4 @@ export default combineReducers({
     currentDate,
     newMenuAdmin,
     orderedMenu,
-    userProfile
 })
